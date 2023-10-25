@@ -29,7 +29,7 @@ function App() {
     useEffect(() => {
         const getNewWords = async () => {
             const word = await fetchNewWords();
-            setWords(word || "");
+            setWords(word || "tiger");
         };
         getNewWords();
     }, []);
@@ -76,7 +76,7 @@ function App() {
             setResult([]);
             const getNewWords = async () => {
                 const word = await fetchNewWords();
-                setWords(word || "");
+                setWords(word || "tiger");
             };
             getNewWords();
         }, 1000);
