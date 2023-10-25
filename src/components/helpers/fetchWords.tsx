@@ -1,10 +1,11 @@
+import { RapidAPIKey } from "../../../secrets.json";
+
 export const fetchNewWords = async () => {
     const url = "https://random-words5.p.rapidapi.com/getRandom?wordLength=5";
     const options = {
         method: "GET",
         headers: {
-            "X-RapidAPI-Key":
-                "4ed22a4a99mshd54a9034ffb1e20p191d44jsn806fc45cae54",
+            "X-RapidAPI-Key": RapidAPIKey,
             "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
         },
     };
