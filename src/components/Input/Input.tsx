@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import Main from "../Main/Main";
+import { Match } from "../../App";
 
 type InputProps = {
     handleUserInput: (letter: string) => void;
     handleDeleteInput: () => void;
     handleInputCheck: () => void;
     allLetters: string[];
-    match: string[];
+    match: Match[];
 };
 
 export default function Input({
@@ -17,8 +17,6 @@ export default function Input({
     match,
 }: InputProps) {
     const [letters, setLetters] = useState<string[]>([]);
-    console.log("MATCH", match);
-
     useEffect(() => {
         const newLetters = [];
         for (let i = 65; i <= 90; i++) {
@@ -29,36 +27,37 @@ export default function Input({
 
     return (
         <>
-            <section className="grid grid-cols-input-mobile sm:grid-cols-input gap-2">
-                {letters?.map((letter) => {
-                    return (
-                        <button
-                            key={letter}
-                            onClick={() => handleUserInput(letter)}
-                            className={`input letter ${
-                                (match?.includes(letter) && "bg-emerald-700") ||
-                                (allLetters?.includes(letter) &&
-                                    "bg-neutral-950") ||
-                                "bg-neutral-800"
-                            }`}
-                        >
-                            {letter}
-                        </button>
-                    );
-                })}
-                <button
-                    className="input grid col-span-2 bg-neutral-900"
-                    onClick={handleDeleteInput}
-                >
-                    delete
-                </button>
-                <button
-                    className="input grid col-span-2 bg-neutral-900"
-                    onClick={handleInputCheck}
-                >
-                    submit
-                </button>
-            </section>
+            {letters?.map((letter) => {
+                return (
+                    <button
+                        key={letter}
+                        onClick={() => handleUserInput(letter)}
+                        className={`input letter ${
+                            (match[0]?.fullMatch?.includes(letter) &&
+                                "bg-emerald-500") ||
+                            (match[0]?.halfMatch?.includes(letter) &&
+                                "bg-[#ff8f00]") ||
+                            (allLetters?.includes(letter) &&
+                                "bg-neutral-950") ||
+                            "bg-neutral-800"
+                        }`}
+                    >
+                        {letter}
+                    </button>
+                );
+            })}
+            <button
+                className="input grid col-span-2 bg-neutral-900"
+                onClick={handleDeleteInput}
+            >
+                delete
+            </button>
+            <button
+                className="input grid col-span-2 bg-neutral-900"
+                onClick={handleInputCheck}
+            >
+                submit
+            </button>
         </>
     );
 }

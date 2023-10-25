@@ -9,7 +9,8 @@ export default {
                 "input-mobile": "repeat(8, 1fr)",
             },
             fontSize: {
-                resp: "10vw",
+                tiles: "2.5rem",
+                resp: "8vw",
             },
         },
         fontFamily: {

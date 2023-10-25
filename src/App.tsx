@@ -3,12 +3,18 @@ import Footer from "./components/Footer/Footer.js";
 import Header from "./components/Header/Header.js";
 import Main from "./components/Main/Main.js";
 import Tiles from "./components/Tiles/Tiles.js";
+import Board from "./components/Board/Board.js";
 import { useEffect, useState } from "react";
 
 export interface Result {
     letters?: string[];
-    colors?: ("bg-emerald-500" | "bg-amber-400" | null)[];
+    colors?: ("bg-emerald-500" | "bg-[#ff8f00]" | null)[];
     rows?: number | undefined;
+}
+
+export interface Match {
+    fullMatch: string[] | undefined;
+    halfMatch: string[] | undefined;
 }
 
 function App() {
@@ -17,7 +23,7 @@ function App() {
     const [result, setResult] = useState<Result[]>([]);
     const [rowCount, setRowCount] = useState<number>(0);
     const [allLetters, setAllLetters] = useState<string[]>([]);
-    const [match, setMatch] = useState<string[]>([]);
+    const [match, setMatch] = useState<Match[]>([]);
 
     const onUserInput = (letter: string) => {
         if (letters.length >= 5) {
@@ -72,13 +78,13 @@ function App() {
             return;
         }
         const correctColor = "bg-emerald-500";
-        const wrongPosColor = "bg-amber-400";
+        const wrongPosColor = "bg-[#ff8f00]";
         const colors = result[rowCount]?.letters?.map((letter, index) => {
             if (letter == words.toUpperCase()[index]) {
                 return correctColor;
             } else if (
                 words.toUpperCase().includes(letter) &&
-                letter !== words[index]
+                letter !== words.toUpperCase()[index]
             ) {
                 return wrongPosColor;
             } else {
@@ -98,11 +104,8 @@ function App() {
                 }
             })
         );
+
         setRowCount(() => rowCount + 1);
-        setMatch([
-            ...match,
-            ...letters.filter((letter) => words.toUpperCase().includes(letter)),
-        ]);
         setLetters([]);
     };
 
@@ -116,20 +119,34 @@ function App() {
             letters.push(keyValue);
         }
         setAllLetters([...letters.join("")]);
-    }, [result]);
+
+        const fullMatch =
+            result[rowCount - 1]?.letters?.filter(
+                (letter, index) => letter == words.toUpperCase()[index]
+            ) ?? [];
+        const halfMatch =
+            result[rowCount - 1]?.letters?.filter(
+                (letter, index) =>
+                    words.toUpperCase()?.includes(letter) &&
+                    letter !== words.toUpperCase()[index]
+            ) ?? [];
+        setMatch([
+            {
+                fullMatch: [...fullMatch],
+                halfMatch: [...halfMatch],
+            },
+        ]);
+    }, [result, rowCount]);
 
     return (
         <>
-            <Header>
-                <h1>Another Wordle</h1>
-            </Header>
-
             <Main>
-                {[...Array(6)].map((_, index) => (
-                    <Tiles key={index} result={result[index]} />
-                ))}
+                <Board>
+                    {[...Array(6)].map((_, index) => (
+                        <Tiles key={index} result={result[index]} />
+                    ))}
+                </Board>
             </Main>
-
             <Footer>
                 <Input
                     handleUserInput={onUserInput}
@@ -139,6 +156,11 @@ function App() {
                     match={match}
                 />
             </Footer>
+            <Header>
+                <h1 className="leading-none">
+                    Wordle Wordle Wordle Wordle Wordle Wordle
+                </h1>
+            </Header>
         </>
     );
 }

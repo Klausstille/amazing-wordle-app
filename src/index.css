@@ -9,7 +9,7 @@
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: #43449c;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -29,8 +29,14 @@ a:hover {
 
 body {
     margin: 0;
+    width: 100vw;
     display: flex;
-    place-items: center;
+    justify-content: center;
+}
+
+#root {
+    max-width: 500px;
+    width: 1000px;
 }
 
 h1 {
@@ -46,8 +52,9 @@ button {
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #1a1a1a;
+    background-color: #ff5a00;
     transition: background-color 0.25s;
+    opacity: 0.8;
 }
 .input:hover {
     /* border-color: #646cff; */
