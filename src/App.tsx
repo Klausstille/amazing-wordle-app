@@ -24,11 +24,13 @@ function App() {
     const [rowCount, setRowCount] = useState<number>(0);
     const [allLetters, setAllLetters] = useState<string[]>([]);
     const [match, setMatch] = useState<Match[]>([]);
+    console.log(letters);
 
     const onUserInput = (letter: string) => {
         if (letters.length >= 5) {
             return;
         }
+
         setLetters([...letters, letter]);
 
         setResult(

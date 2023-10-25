@@ -25,6 +25,23 @@ export default function Input({
         setLetters(newLetters);
     }, []);
 
+    useEffect(() => {
+        const handleKeyDown = (evt: KeyboardEvent) => {
+            const keyInput = evt.key.toUpperCase();
+            if (letters.includes(keyInput)) {
+                handleUserInput(keyInput);
+            } else if (keyInput === "BACKSPACE") {
+                handleDeleteInput();
+            } else if (keyInput === "ENTER") {
+                handleInputCheck();
+            }
+        };
+        document.body.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.body.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [handleUserInput, handleDeleteInput, handleInputCheck, letters]);
+
     return (
         <>
             {letters?.map((letter) => {
