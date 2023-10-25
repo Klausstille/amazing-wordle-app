@@ -4,6 +4,7 @@ import Header from "./components/Header/Header.js";
 import Main from "./components/Main/Main.js";
 import Tiles from "./components/Tiles/Tiles.js";
 import Board from "./components/Board/Board.js";
+import { fetchNewWords } from "./components/helpers/fetchWords.js";
 import { useEffect, useState } from "react";
 
 export interface Result {
@@ -18,21 +19,75 @@ export interface Match {
 }
 
 function App() {
-    const words: string = "radio";
+    const [words, setWords] = useState<string>("");
     const [letters, setLetters] = useState<string[]>([]);
     const [result, setResult] = useState<Result[]>([]);
     const [rowCount, setRowCount] = useState<number>(0);
     const [allLetters, setAllLetters] = useState<string[]>([]);
     const [match, setMatch] = useState<Match[]>([]);
-    console.log(letters);
+
+    useEffect(() => {
+        const getNewWords = async () => {
+            const word = await fetchNewWords();
+            setWords(word || "");
+        };
+        getNewWords();
+    }, []);
+
+    useEffect(() => {
+        const usedLetters = new Set();
+        result?.map((entry) => {
+            usedLetters.add(entry.letters?.join(""));
+        });
+        const letters = [];
+        for (const keyValue of usedLetters) {
+            letters.push(keyValue);
+        }
+        setAllLetters([...letters.join("")]);
+
+        const fullMatch =
+            result[rowCount - 1]?.letters?.filter(
+                (letter, index) => letter == words.toUpperCase()[index]
+            ) ?? [];
+        const halfMatch =
+            result[rowCount - 1]?.letters?.filter(
+                (letter, index) =>
+                    words.toUpperCase()?.includes(letter) &&
+                    letter !== words.toUpperCase()[index]
+            ) ?? [];
+        setMatch([
+            {
+                fullMatch: [...fullMatch],
+                halfMatch: [...halfMatch],
+            },
+        ]);
+        if (fullMatch.length === 5) {
+            resetGame("you win!");
+        }
+        if (rowCount === 6 && fullMatch.length !== 5) {
+            resetGame("you lose! The right answer is " + words);
+        }
+    }, [result, rowCount, words]);
+
+    const resetGame = (text: string) => {
+        alert(text);
+        setTimeout(() => {
+            setRowCount(0);
+            setResult([]);
+            const getNewWords = async () => {
+                const word = await fetchNewWords();
+                setWords(word || "");
+            };
+            getNewWords();
+        }, 1000);
+    };
+    console.log(words);
 
     const onUserInput = (letter: string) => {
         if (letters.length >= 5) {
             return;
         }
-
         setLetters([...letters, letter]);
-
         setResult(
             result[rowCount]
                 ? result.map((entry) => {
@@ -75,6 +130,7 @@ function App() {
         );
         setLetters(newSetLetters);
     };
+
     const onHandleCheck = () => {
         if (result[rowCount]?.letters?.length !== 5) {
             return;
@@ -106,39 +162,9 @@ function App() {
                 }
             })
         );
-
         setRowCount(() => rowCount + 1);
         setLetters([]);
     };
-
-    useEffect(() => {
-        const usedLetters = new Set();
-        result?.map((entry) => {
-            usedLetters.add(entry.letters?.join(""));
-        });
-        const letters = [];
-        for (const keyValue of usedLetters) {
-            letters.push(keyValue);
-        }
-        setAllLetters([...letters.join("")]);
-
-        const fullMatch =
-            result[rowCount - 1]?.letters?.filter(
-                (letter, index) => letter == words.toUpperCase()[index]
-            ) ?? [];
-        const halfMatch =
-            result[rowCount - 1]?.letters?.filter(
-                (letter, index) =>
-                    words.toUpperCase()?.includes(letter) &&
-                    letter !== words.toUpperCase()[index]
-            ) ?? [];
-        setMatch([
-            {
-                fullMatch: [...fullMatch],
-                halfMatch: [...halfMatch],
-            },
-        ]);
-    }, [result, rowCount]);
 
     return (
         <>
