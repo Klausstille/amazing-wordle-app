@@ -62,10 +62,10 @@ function App() {
             },
         ]);
         if (fullMatch.length === 5) {
-            resetGame("you win!");
+            resetGame("yeah! you fuckin' won!");
         }
         if (rowCount === 6 && fullMatch.length !== 5) {
-            resetGame("you lose! The right answer is " + words);
+            resetGame("fuckin' loser! The answer was " + words);
         }
     }, [result, rowCount, words]);
 
@@ -81,7 +81,6 @@ function App() {
             getNewWords();
         }, 1000);
     };
-    console.log(words);
 
     const onUserInput = (letter: string) => {
         if (letters.length >= 5) {
