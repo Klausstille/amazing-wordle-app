@@ -1,4 +1,4 @@
-import { RapidAPIKey } from "../../../secrets.json";
+export const RapidAPIKey = import.meta.env.VITE_RapidAPIKey;
 
 export const fetchNewWords = async () => {
     const url = "https://random-words5.p.rapidapi.com/getRandom?wordLength=5";
