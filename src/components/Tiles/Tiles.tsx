@@ -8,7 +8,7 @@ export default function Tiles({ result }: TilesProps) {
     const tiles = new Array(5).fill(null);
     return (
         <>
-            {tiles.map((letter, index) => {
+            {tiles.map((_, index) => {
                 return (
                     <button
                         className={`tiles h-[4rem] py-0 text-white ${result?.colors?.[index]}`}

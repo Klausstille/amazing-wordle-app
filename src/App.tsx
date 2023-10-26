@@ -19,7 +19,7 @@ export interface Match {
 }
 
 function App() {
-    const [words, setWords] = useState<string>("");
+    const [words, setWords] = useState<string>("tiger");
     const [letters, setLetters] = useState<string[]>([]);
     const [result, setResult] = useState<Result[]>([]);
     const [rowCount, setRowCount] = useState<number>(0);
@@ -28,8 +28,10 @@ function App() {
 
     useEffect(() => {
         const getNewWords = async () => {
-            const word = await fetchNewWords();
-            setWords(word || "tiger");
+            const word: string | void = await fetchNewWords();
+            if (typeof word === "string") {
+                setWords(word);
+            }
         };
         getNewWords();
     }, []);
@@ -75,8 +77,10 @@ function App() {
             setRowCount(0);
             setResult([]);
             const getNewWords = async () => {
-                const word = await fetchNewWords();
-                setWords(word || "tiger");
+                const word: string | void = await fetchNewWords();
+                if (typeof word === "string") {
+                    setWords(word);
+                }
             };
             getNewWords();
         }, 1000);
