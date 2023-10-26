@@ -7,6 +7,7 @@ type InputProps = {
     handleInputCheck: () => void;
     allLetters: string[];
     match: Match[];
+    words: string;
 };
 
 export default function Input({
@@ -15,8 +16,10 @@ export default function Input({
     handleInputCheck,
     allLetters,
     match,
+    words,
 }: InputProps) {
     const [letters, setLetters] = useState<string[]>([]);
+
     useEffect(() => {
         const newLetters = [];
         for (let i = 65; i <= 90; i++) {
@@ -53,13 +56,21 @@ export default function Input({
                             (match[0]?.fullMatch?.includes(letter) &&
                                 "bg-emerald-500") ||
                             (match[0]?.halfMatch?.includes(letter) &&
-                                "bg-[#ff8f00]") ||
+                                "bg-[#4456e1]") ||
                             (allLetters?.includes(letter) &&
                                 "bg-neutral-950") ||
                             "bg-neutral-800"
-                        }`}
+                        } relative`}
                     >
-                        {letter}
+                        {match[0]?.fullMatch?.includes(letter) && (
+                            <>
+                                <span>{letter}</span>
+                                <span className="text-[10px] absolute top-0 right-1 sm:top-1 sm:right-2">
+                                    {words.toUpperCase().indexOf(letter) + 1}
+                                </span>
+                            </>
+                        )}
+                        {!match[0]?.fullMatch?.includes(letter) && letter}
                     </button>
                 );
             })}

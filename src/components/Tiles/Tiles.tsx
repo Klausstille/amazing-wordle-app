@@ -11,10 +11,10 @@ export default function Tiles({ result }: TilesProps) {
             {tiles.map((_, index) => {
                 return (
                     <button
-                        className={`tiles h-[4rem] py-0 text-white ${result?.colors?.[index]}`}
+                        className={`tiles h-[18vw] py-0 text-white ${result?.colors?.[index]}`}
                         key={index}
                     >
-                        <p className="text-tiles text-center font-bold">
+                        <p className="text-resp text-center font-bold">
                             {result?.letters?.[index]}
                         </p>
                     </button>

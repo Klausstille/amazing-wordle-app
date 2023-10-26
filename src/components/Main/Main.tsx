@@ -6,7 +6,7 @@ type MainProps = {
 
 export default function Main({ children }: MainProps) {
     return (
-        <section className="w-full flex flex-col justify-center">
+        <section className="w-full flex flex-col justify-center sm:pb-[143px] pb-[174px]">
             {children}
         </section>
     );
