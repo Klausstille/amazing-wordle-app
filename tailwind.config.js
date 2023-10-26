@@ -10,7 +10,7 @@ export default {
             },
             fontSize: {
                 tiles: "2.5rem",
-                resp: "8vw",
+                resp: "3.5vw",
             },
         },
         fontFamily: {

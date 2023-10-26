@@ -6,10 +6,15 @@ import Tiles from "./components/Tiles/Tiles.js";
 import Board from "./components/Board/Board.js";
 import { fetchNewWords } from "./components/helpers/fetchWords.js";
 import { useEffect, useState } from "react";
+import { handleCheck } from "./components/helpers/handleCheck.js";
+import { deleteInput } from "./components/helpers/deleteInput.js";
+import { handleInput } from "./components/helpers/handleInput.js";
+import { keyBoardCheck } from "./components/helpers/keyBoardCheck.js";
+import { resetGame } from "./components/helpers/resetGame.js";
 
 export interface Result {
     letters?: string[];
-    colors?: ("bg-emerald-500" | "bg-[#ff8f00]" | null)[];
+    colors?: ("bg-emerald-500" | "bg-[#4456e1]" | null)[];
     rows?: number | undefined;
 }
 
@@ -34,6 +39,7 @@ function App() {
             }
         };
         getNewWords();
+        console.log("Cheater... 🤥");
     }, []);
 
     useEffect(() => {
@@ -47,126 +53,48 @@ function App() {
         }
         setAllLetters([...letters.join("")]);
 
-        const fullMatch =
-            result[rowCount - 1]?.letters?.filter(
-                (letter, index) => letter == words.toUpperCase()[index]
-            ) ?? [];
-        const halfMatch =
-            result[rowCount - 1]?.letters?.filter(
-                (letter, index) =>
-                    words.toUpperCase()?.includes(letter) &&
-                    letter !== words.toUpperCase()[index]
-            ) ?? [];
-        setMatch([
-            {
-                fullMatch: [...fullMatch],
-                halfMatch: [...halfMatch],
-            },
-        ]);
-        if (fullMatch.length === 5) {
-            resetGame("yeah! you fuckin' won!");
-        }
-        if (rowCount === 6 && fullMatch.length !== 5) {
-            resetGame("fuckin' loser! The answer was " + words);
+        const keyCheck = keyBoardCheck(result, rowCount, words);
+        if (keyCheck) {
+            const { matchingLetters, fullMatch } = keyCheck;
+            setMatch(matchingLetters);
+            if (fullMatch.length === 5) {
+                const text = "yeah! you fuckin' won!";
+                resetGame(text, setRowCount, setResult, setWords);
+            }
+            if (rowCount === 6 && fullMatch.length !== 5) {
+                const text = "fuckin' loser! The answer was " + words;
+                resetGame(text, setRowCount, setResult, setWords);
+            }
         }
     }, [result, rowCount, words]);
 
-    const resetGame = (text: string) => {
-        alert(text);
-        setTimeout(() => {
-            setRowCount(0);
-            setResult([]);
-            const getNewWords = async () => {
-                const word: string | void = await fetchNewWords();
-                if (typeof word === "string") {
-                    setWords(word);
-                }
-            };
-            getNewWords();
-        }, 1000);
-    };
-
     const onUserInput = (letter: string) => {
-        if (letters.length >= 5) {
-            return;
+        const userInput = handleInput(letter, letters, result, rowCount);
+        if (userInput) {
+            const { newSetOfLetters, results } = userInput;
+            setResult(results);
+            setLetters(newSetOfLetters);
         }
-        setLetters([...letters, letter]);
-        setResult(
-            result[rowCount]
-                ? result.map((entry) => {
-                      if (entry.rows === rowCount) {
-                          return {
-                              letters: [...letters, letter],
-                              colors: [],
-                              rows: rowCount,
-                          };
-                      } else {
-                          return entry;
-                      }
-                  })
-                : [
-                      ...result,
-                      {
-                          letters: [letter],
-                          colors: [],
-                          rows: rowCount,
-                      },
-                  ]
-        );
     };
 
     const onDeleteInput = () => {
-        const newSetLetters: string[] = [...letters];
-        newSetLetters.pop();
-        setResult(
-            result.map((entry) => {
-                if (entry.rows === rowCount) {
-                    return {
-                        letters: newSetLetters,
-                        colors: [],
-                        rows: entry.rows,
-                    };
-                } else {
-                    return entry;
-                }
-            })
-        );
-        setLetters(newSetLetters);
+        const inputDelete = deleteInput(result, letters, rowCount);
+        if (inputDelete) {
+            const { results, newSetOfLetters } = inputDelete;
+            setResult(results);
+            setLetters(newSetOfLetters);
+        }
     };
 
     const onHandleCheck = () => {
-        if (result[rowCount]?.letters?.length !== 5) {
-            return;
+        const checkResult = handleCheck(result, rowCount, words, letters);
+        if (checkResult) {
+            const { checkedResults, checkedRowCount, checkedLetters } =
+                checkResult;
+            setResult(checkedResults);
+            setRowCount(checkedRowCount);
+            setLetters(checkedLetters);
         }
-        const correctColor = "bg-emerald-500";
-        const wrongPosColor = "bg-[#ff8f00]";
-        const colors = result[rowCount]?.letters?.map((letter, index) => {
-            if (letter == words.toUpperCase()[index]) {
-                return correctColor;
-            } else if (
-                words.toUpperCase().includes(letter) &&
-                letter !== words.toUpperCase()[index]
-            ) {
-                return wrongPosColor;
-            } else {
-                return null;
-            }
-        });
-        setResult(
-            result.map((entry) => {
-                if (entry.rows === rowCount) {
-                    return {
-                        letters: letters,
-                        colors: colors,
-                        rows: entry.rows,
-                    };
-                } else {
-                    return entry;
-                }
-            })
-        );
-        setRowCount(() => rowCount + 1);
-        setLetters([]);
     };
 
     return (
@@ -185,11 +113,12 @@ function App() {
                     handleInputCheck={onHandleCheck}
                     allLetters={allLetters}
                     match={match}
+                    words={words}
                 />
             </Footer>
             <Header>
-                <h1 className="leading-none">
-                    Wordle Wordle Wordle Wordle Wordle Wordle
+                <h1 className="sm:leading-[28rem] leading-[10rem] self-center">
+                    Wordle
                 </h1>
             </Header>
         </>
