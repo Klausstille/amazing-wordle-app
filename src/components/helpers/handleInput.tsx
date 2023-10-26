@@ -1,4 +1,11 @@
-export const handleInput = (letter: string, letters, result, rowCount) => {
+import { Result } from "../../App";
+
+export const handleInput = (
+    letter: string,
+    letters: string[],
+    result: Result[],
+    rowCount: number
+) => {
     if (letters.length >= 5) {
         return;
     }

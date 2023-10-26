@@ -1,9 +1,14 @@
-export const handleCheck = (result, rowCount, words, letters) => {
+import { Result } from "../../App";
+
+export const handleCheck = (
+    result: Result[],
+    rowCount: number,
+    words: string,
+    letters: string[]
+) => {
     if (result[rowCount]?.letters?.length !== 5) {
         return;
     }
-    console.log("RESULT", result);
-
     const correctColor = "bg-emerald-500";
     const wrongPosColor = "bg-[#4456e1]";
     const colors = result[rowCount]?.letters?.map((letter, index) => {
@@ -30,7 +35,7 @@ export const handleCheck = (result, rowCount, words, letters) => {
         }
     });
     const checkedRowCount = rowCount + 1;
-    const checkedLetters = [];
+    const checkedLetters: string[] = [];
 
     return { checkedResults, checkedRowCount, checkedLetters };
 };

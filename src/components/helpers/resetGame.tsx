@@ -1,7 +1,13 @@
 import { fetchNewWords } from "./fetchWords";
+import { Result } from "../../App";
+import { Dispatch, SetStateAction } from "react";
 
-export const resetGame = (text: string, setRowCount, setResult, setWords) => {
-    alert(text);
+export const resetGame = (
+    text: string,
+    setRowCount: Dispatch<SetStateAction<number>>,
+    setResult: Dispatch<SetStateAction<Result[]>>,
+    setWords: Dispatch<SetStateAction<string>>
+) => {
     setTimeout(() => {
         setRowCount(0);
         setResult([]);
@@ -10,6 +16,7 @@ export const resetGame = (text: string, setRowCount, setResult, setWords) => {
             if (typeof word === "string") {
                 setWords(word);
             }
+            alert(text);
         };
         getNewWords();
     }, 1000);

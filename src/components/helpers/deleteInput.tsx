@@ -1,4 +1,10 @@
-export const deleteInput = (result, letters, rowCount) => {
+import { Result } from "../../App";
+
+export const deleteInput = (
+    result: Result[],
+    letters: string[],
+    rowCount: number
+) => {
     const newSetOfLetters: string[] = [...letters];
     newSetOfLetters.pop();
     const results = result.map((entry) => {

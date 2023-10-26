@@ -1,4 +1,10 @@
-export const keyBoardCheck = (result, rowCount, words) => {
+import { Result } from "../../App";
+
+export const keyBoardCheck = (
+    result: Result[],
+    rowCount: number,
+    words: string
+) => {
     const fullMatch =
         result[rowCount - 1]?.letters?.filter(
             (letter, index) => letter == words.toUpperCase()[index]
