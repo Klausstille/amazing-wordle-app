@@ -30,6 +30,7 @@ function App() {
     const [rowCount, setRowCount] = useState<number>(0);
     const [allLetters, setAllLetters] = useState<string[]>([]);
     const [match, setMatch] = useState<Match[]>([]);
+    const [isIncorrectWord, setIncorrectWord] = useState<boolean>(false);
 
     useEffect(() => {
         const getNewWords = async () => {
@@ -89,11 +90,19 @@ function App() {
     const onHandleCheck = async () => {
         const checkResult = await handleCheck(result, rowCount, words, letters);
         if (checkResult) {
-            const { checkedResults, checkedRowCount, checkedLetters } =
-                checkResult;
+            const {
+                checkedResults,
+                checkedRowCount,
+                checkedLetters,
+                isIncorrectWord,
+            } = checkResult;
             setResult(checkedResults);
             setRowCount(checkedRowCount);
             setLetters(checkedLetters);
+            setIncorrectWord(isIncorrectWord);
+            setTimeout(() => {
+                setIncorrectWord(false);
+            }, 1000);
         }
     };
 
@@ -102,7 +111,11 @@ function App() {
             <Main>
                 <Board>
                     {[...Array(6)].map((_, index) => (
-                        <Tiles key={index} result={result[index]} />
+                        <Tiles
+                            key={index}
+                            result={result[index]}
+                            isIncorrectWord={isIncorrectWord}
+                        />
                     ))}
                 </Board>
             </Main>

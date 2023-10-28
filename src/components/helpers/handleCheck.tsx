@@ -29,6 +29,7 @@ export const handleCheck = async (
         }
     };
     const wordExists = await checkWordExists(word || "");
+    const isIncorrectWord: boolean = wordExists ? false : true;
     const correctPosColor = "bg-emerald-500";
     const wrongPosColor = "bg-[#4456e1]";
     const wrongLetterColor = "bg-[#0d0d0d]";
@@ -58,5 +59,5 @@ export const handleCheck = async (
     const checkedRowCount = wordExists ? rowCount + 1 : rowCount;
     const checkedLetters: string[] = [];
 
-    return { checkedResults, checkedRowCount, checkedLetters };
+    return { checkedResults, checkedRowCount, checkedLetters, isIncorrectWord };
 };
