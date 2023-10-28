@@ -11,7 +11,9 @@ export default function Tiles({ result }: TilesProps) {
             {tiles.map((_, index) => {
                 return (
                     <button
-                        className={`tiles h-[18vw] py-0 text-white ${result?.colors?.[index]}`}
+                        className={`tiles h-[18vw] py-0 text-white ${
+                            result?.colors?.[index]
+                        } ${result?.colors?.[index] ? "active" : ""}`}
                         key={index}
                     >
                         <p className="text-resp text-center font-bold">

@@ -29,18 +29,19 @@ export const handleCheck = async (
         }
     };
     const wordExists = await checkWordExists(word || "");
-    const correctColor = "bg-emerald-500";
+    const correctPosColor = "bg-emerald-500";
     const wrongPosColor = "bg-[#4456e1]";
+    const wrongLetterColor = "bg-[#0d0d0d]";
     const colors = result[rowCount]?.letters?.map((letter, index) => {
         if (letter == words.toUpperCase()[index]) {
-            return correctColor;
+            return correctPosColor;
         } else if (
             words.toUpperCase().includes(letter) &&
             letter !== words.toUpperCase()[index]
         ) {
             return wrongPosColor;
         } else {
-            return null;
+            return wrongLetterColor;
         }
     });
     const checkedResults = result?.map((entry) => {
