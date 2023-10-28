@@ -19,7 +19,7 @@ export default function Input({
     words,
 }: InputProps) {
     const [letters, setLetters] = useState<string[]>([]);
-
+    const main = document.body.querySelector(".main");
     useEffect(() => {
         const newLetters = [];
         for (let i = 65; i <= 90; i++) {
@@ -39,11 +39,11 @@ export default function Input({
                 handleInputCheck();
             }
         };
-        document.body.addEventListener("keydown", handleKeyDown);
+        main && document.body.addEventListener("keydown", handleKeyDown);
         return () => {
-            document.body.removeEventListener("keydown", handleKeyDown);
+            main && document.body.removeEventListener("keydown", handleKeyDown);
         };
-    }, [handleUserInput, handleDeleteInput, handleInputCheck, letters]);
+    }, [handleUserInput, handleDeleteInput, handleInputCheck, letters, main]);
 
     return (
         <>
@@ -60,7 +60,7 @@ export default function Input({
                             (allLetters?.includes(letter) &&
                                 "bg-neutral-950") ||
                             "bg-neutral-800"
-                        } relative`}
+                        } relative font-avenir`}
                     >
                         {match[0]?.fullMatch?.includes(letter) && (
                             <>
