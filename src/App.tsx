@@ -32,8 +32,6 @@ function App() {
     const [allLetters, setAllLetters] = useState<string[]>([]);
     const [match, setMatch] = useState<Match[]>([]);
 
-    const [submitted, setSubmitted] = useState<boolean>(false);
-
     useEffect(() => {
         const getNewWords = async () => {
             const word: string | void = await fetchNewWords();
