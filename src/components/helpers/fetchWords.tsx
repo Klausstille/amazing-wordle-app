@@ -1,38 +1,75 @@
 // const { RapidAPIKey } = import.meta.env.VITE_RapidAPIKey;
+const wordsArray = [
+    "Apple",
+    "Table",
+    "Chair",
+    "Light",
+    "House",
+    "Water",
+    "Queen",
+    "Snake",
+    "Smile",
+    "Happy",
+    "Beach",
+    "Music",
+    "Dance",
+    "Clock",
+    "Earth",
+    "Plant",
+    "Grass",
+    "Ocean",
+    "Storm",
+    "Cloud",
+    "River",
+    "Brave",
+    "Green",
+    "Sport",
+    "Stone",
+    "Brush",
+    "Sweet",
+    "Space",
+    "Child",
+    "Tiger",
+    "Lemon",
+    "Maple",
+    "Smile",
+    "Black",
+    "White",
+    "Amber",
+    "Chess",
+    "Olive",
+    "Eagle",
+    "Peace",
+    "Lemon",
+    "Bread",
+    "Queen",
+    "Shell",
+    "Storm",
+    "Chair",
+    "Flame",
+    "Night",
+    "Crown",
+];
 
 export const fetchNewWords = async () => {
-    // const url = "https://random-words5.p.rapidapi.com/getRandom?wordLength=5";
-    // const options = {
-    //     method: "GET",
-    //     headers: {
-    //         "X-RapidAPI-Key": RapidAPIKey,
-    //         "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
-    //     },
-    // };
-    // try {
-    //     const response = await fetch(url, options);
-    //     const result = await response.text();
-    //     return result;
-    // } catch (error) {
-    //     console.error(error);
-    // }
+    const randomWord =
+        wordsArray[Math.floor(Math.random() * wordsArray.length)];
+    return randomWord;
 };
 
 // export const fetchNewWords = async () => {
-//     const url =
-//         "https://1000-most-common-words.p.rapidapi.com/words/german?words_limit=20";
+//     const url = "https://random-words5.p.rapidapi.com/getRandom?wordLength=5";
 //     const options = {
 //         method: "GET",
 //         headers: {
-//             "X-RapidAPI-Key":
-//                 "4ed22a4a99mshd54a9034ffb1e20p191d44jsn806fc45cae54",
-//             "X-RapidAPI-Host": "1000-most-common-words.p.rapidapi.com",
+//             "X-RapidAPI-Key": RapidAPIKey,
+//             "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
 //         },
 //     };
 //     try {
 //         const response = await fetch(url, options);
 //         const result = await response.text();
-//         console.log(result);
+//         return result;
 //     } catch (error) {
 //         console.error(error);
 //     }

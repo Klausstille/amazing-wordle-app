@@ -4,11 +4,11 @@ import GuessDistribution from "./GuessDistribution";
 
 interface StatsProps {
     stats: Stats[];
-    handleShowStats: () => void;
     words: string;
+    player: string;
 }
 
-export default function Stat({ stats, handleShowStats, words }: StatsProps) {
+export default function Stat({ stats, words, player }: StatsProps) {
     return (
         <>
             {stats[stats.length - 1].isWin ? (
@@ -25,14 +25,8 @@ export default function Stat({ stats, handleShowStats, words }: StatsProps) {
                     </h2>
                 </>
             )}
-            <Statistics stats={stats} />
+            <Statistics stats={stats} player={player} />
             <GuessDistribution stats={stats} />
-            <button
-                className="show-stats font-light text-[grey]"
-                onClick={() => handleShowStats()}
-            >
-                <h2>X</h2>
-            </button>
         </>
     );
 }

@@ -4,13 +4,18 @@ import { calculateMaxStreak } from "./calculateMaxStreak";
 
 interface StatisticsProps {
     stats: Stats[];
+    player: string;
 }
 
-export default function Statistics({ stats }: StatisticsProps) {
+export default function Statistics({ stats, player }: StatisticsProps) {
     const currentStreak = calculateCurrentStreak(stats);
     const maxStreak = calculateMaxStreak(stats);
     return (
         <>
+            <h2 className="font-black pt-8 text-center">
+                Hi, {player}
+                <p>Good game!</p>
+            </h2>
             <h3 className="font-black pt-8">STATISTICS</h3>
             <section className="grid grid-cols-4 gap-3">
                 <aside className="text-center">

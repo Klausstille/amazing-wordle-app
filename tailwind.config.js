@@ -15,6 +15,7 @@ export default {
         },
         fontFamily: {
             avenir: "Avenir Next",
+            clash: "Clash Display Semibold",
             inter: fontInter,
         },
     },

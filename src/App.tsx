@@ -1,3 +1,4 @@
+import Intro from "./components/Intro/Intro.js";
 import Input from "./components/Input/Input.js";
 import Footer from "./components/Footer/Footer.js";
 import Header from "./components/Header/Header.js";
@@ -5,16 +6,22 @@ import Main from "./components/Main/Main.js";
 import Tiles from "./components/Tiles/Tiles.js";
 import Board from "./components/Board/Board.js";
 import Stats from "./components/Stats/Stats.js";
-import { CSSTransition } from "react-transition-group";
+import IntroWrapper from "./components/Intro/IntroWrapper.js";
+import InstructionWrapper from "./components/Instruction/InstructionWrapper.js";
+import Instruction from "./components/Instruction/Instruction.js";
 import StatsWrapper from "./components/StatsWrapper/StatsWrapper.js";
+import NavWrapper from "./components/Nav/NavWrapper.js";
+import Nav from "./components/Nav/Nav.js";
+import { CSSTransition } from "react-transition-group";
 import { fetchNewWords } from "./components/helpers/fetchWords.js";
 import { useEffect, useState } from "react";
-import useLocalStorageState from "use-local-storage-state";
 import { handleCheck } from "./components/helpers/handleCheck.js";
 import { deleteInput } from "./components/helpers/deleteInput.js";
 import { handleInput } from "./components/helpers/handleInput.js";
 import { winwinCheck } from "./components/helpers/winwinCheck.js";
 import { resetGame } from "./components/helpers/resetGame.js";
+import useLocalStorageState from "use-local-storage-state";
+import GetWindowDimensions from "./components/helpers/getWindowDimensions.js";
 
 export interface Stats {
     game: Result[];
@@ -41,7 +48,25 @@ function App() {
     const [stats, setStats] = useLocalStorageState<Stats[]>("game-stats", {
         defaultValue: [],
     });
+    const [player, setPlayer] = useLocalStorageState<string>("name", {
+        defaultValue: "",
+    });
+    const { width } = GetWindowDimensions();
     const [showStats, setShowStats] = useState<boolean>(false);
+    const [showInfo, setShowInfo] = useState<boolean>(
+        width < 1024 ? false : true
+    );
+
+    const handleSubmitName = (evt: SubmitEvent) => {
+        evt.preventDefault();
+        const nameInput = (
+            evt.target as HTMLFormElement
+        ).querySelector<HTMLInputElement>('input[name="name"]');
+        if (nameInput) {
+            const name: string = nameInput.value;
+            setPlayer(name);
+        }
+    };
 
     useEffect(() => {
         const getNewWords = async () => {
@@ -53,7 +78,7 @@ function App() {
         getNewWords();
         console.log("Cheater... 🤥");
     }, []);
-
+    console.log("words", words);
     useEffect(() => {
         if (!result) return;
         const usedLetters = new Set(
@@ -124,12 +149,23 @@ function App() {
         }
     };
 
-    const handleShowStats = () => {
-        setShowStats(!showStats);
-    };
+    useEffect(() => {
+        width > 1024 && setShowInfo(true);
+        width < 1024 && setShowInfo(false);
+    }, [width]);
 
     return (
         <>
+            <CSSTransition
+                in={player ? false : true}
+                classNames="stats"
+                timeout={300}
+                unmountOnExit
+            >
+                <IntroWrapper>
+                    <Intro handleSubmit={handleSubmitName} />
+                </IntroWrapper>
+            </CSSTransition>
             <CSSTransition
                 in={showStats}
                 classNames="stats"
@@ -137,40 +173,59 @@ function App() {
                 unmountOnExit
             >
                 <StatsWrapper>
-                    <Stats
-                        stats={stats}
-                        handleShowStats={handleShowStats}
-                        words={words}
-                    />
+                    <Stats stats={stats} words={words} player={player} />
                 </StatsWrapper>
             </CSSTransition>
 
-            <Main>
-                <Board>
-                    {[...Array(6)].map((_, index) => (
-                        <Tiles
-                            key={index}
-                            result={result[index]}
-                            isIncorrectWord={isIncorrectWord}
+            {player && (
+                <>
+                    <NavWrapper>
+                        <Nav
+                            setShowInfo={setShowInfo}
+                            setShowStats={setShowStats}
+                            showStats={showStats}
+                            showInfo={showInfo}
+                            width={width}
                         />
-                    ))}
-                </Board>
-            </Main>
-            <Footer>
-                <Input
-                    handleUserInput={onUserInput}
-                    handleDeleteInput={onDeleteInput}
-                    handleInputCheck={onHandleCheck}
-                    allLetters={allLetters}
-                    match={match}
-                    words={words}
-                />
-            </Footer>
-            <Header>
-                <h1 className="sm:leading-[28rem] leading-[10rem] self-center">
-                    Wordle
-                </h1>
-            </Header>
+                    </NavWrapper>
+                    <Main>
+                        <CSSTransition
+                            in={showInfo}
+                            classNames="stats"
+                            timeout={300}
+                            unmountOnExit
+                        >
+                            <InstructionWrapper>
+                                <Instruction />
+                            </InstructionWrapper>
+                        </CSSTransition>
+                        <Board>
+                            {[...Array(6)].map((_, index) => (
+                                <Tiles
+                                    key={index}
+                                    result={result[index]}
+                                    isIncorrectWord={isIncorrectWord}
+                                />
+                            ))}
+                        </Board>
+                        <Footer>
+                            <Input
+                                handleUserInput={onUserInput}
+                                handleDeleteInput={onDeleteInput}
+                                handleInputCheck={onHandleCheck}
+                                allLetters={allLetters}
+                                match={match}
+                                words={words}
+                            />
+                        </Footer>
+                    </Main>
+                    <Header>
+                        <h1 className="sm:leading-[28rem] leading-[10rem] self-center font-avenir">
+                            Wordle
+                        </h1>
+                    </Header>
+                </>
+            )}
         </>
     );
 }

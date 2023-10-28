@@ -20,7 +20,7 @@ export default function GuessDistribution({ stats }: GuessDistributionProps) {
 
     return (
         <>
-            <h3 className="font-black">GUESS DISTRIBUTION</h3>
+            <h3 className="font-black pt-6">GUESS DISTRIBUTION</h3>
             <section className="grid gap-1">
                 <section className="grid gap-1">
                     {Array.from({ length: 6 }).map((_, index) => {
