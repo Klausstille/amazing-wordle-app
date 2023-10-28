@@ -15,12 +15,12 @@ import { resetGame } from "./components/helpers/resetGame.js";
 export interface Result {
     letters?: string[];
     colors?: ("bg-emerald-500" | "bg-[#4456e1]" | null)[];
-    rows?: number | undefined;
+    rows?: number;
 }
 
 export interface Match {
-    fullMatch: string[] | undefined;
-    halfMatch: string[] | undefined;
+    fullMatch: string[];
+    halfMatch: string[];
 }
 
 function App() {
@@ -86,8 +86,8 @@ function App() {
         }
     };
 
-    const onHandleCheck = () => {
-        const checkResult = handleCheck(result, rowCount, words, letters);
+    const onHandleCheck = async () => {
+        const checkResult = await handleCheck(result, rowCount, words, letters);
         if (checkResult) {
             const { checkedResults, checkedRowCount, checkedLetters } =
                 checkResult;
