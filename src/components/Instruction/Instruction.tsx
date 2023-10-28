@@ -11,7 +11,6 @@ export default function Instruction() {
                 The color of the tiles will change to show how <br></br>
                 close your guess was to the word.
             </h3>
-
             <section className="flex flex-col justify-center text-center">
                 <h3 className="font-black py-3">EXAMPLES</h3>
                 <aside className="text-center flex gap-1 justify-center">
@@ -75,6 +74,10 @@ export default function Instruction() {
                     No letter in the word in any spot.
                 </h3>
             </section>
+            <p className="font-bold pt-4 tracking-widest text-center">
+                Built with much ❤️ by Klaus Stille <br></br>With React (Vite),
+                Typescript and TailwindCSS
+            </p>
         </>
     );
 }
