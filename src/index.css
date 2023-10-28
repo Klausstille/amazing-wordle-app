@@ -63,12 +63,12 @@ button:focus {
     outline: none;
 }
 
-button.active {
-    animation-name: animate;
+button.flip {
+    animation-name: flipTile;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
 }
-@keyframes animate {
+@keyframes flipTile {
     0% {
         transform: rotateX(0deg);
     }
@@ -77,6 +77,32 @@ button.active {
     }
     100% {
         transform: rotateX(0deg);
+    }
+}
+
+button.buzz {
+    animation-name: buzzTile;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+}
+@keyframes buzzTile {
+    0% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-20px);
+    }
+    40% {
+        transform: translateX(20px);
+    }
+    60% {
+        transform: translateX(-20px);
+    }
+    80% {
+        transform: translateX(20px);
+    }
+    100% {
+        transform: translateX(0);
     }
 }
 

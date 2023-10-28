@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 
 interface TilesProps {
     result: Result;
+    isIncorrectWord: boolean;
 }
 
-export default function Tiles({ result }: TilesProps) {
+export default function Tiles({ result, isIncorrectWord }: TilesProps) {
     const [activeTiles, setActiveTiles] = useState(new Array(5).fill(false));
     const [iteration, setIteration] = useState(0);
     console.log(iteration);
@@ -39,9 +40,9 @@ export default function Tiles({ result }: TilesProps) {
                         className={`tiles h-[18vw] py-0 text-white ${
                             result?.colors?.[index]
                         } ${
-                            result?.colors?.[index] &&
-                            activeTiles[index] &&
-                            "active"
+                            result?.colors?.[index] && activeTiles[index]
+                                ? "flip"
+                                : isIncorrectWord && result && "buzz"
                         }`}
                         key={index}
                     >
