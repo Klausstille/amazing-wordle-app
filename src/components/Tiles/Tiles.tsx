@@ -6,24 +6,24 @@ interface TilesProps {
 }
 
 export default function Tiles({ result }: TilesProps) {
-    const [activeTiles, setActiveTiles] = useState(result?.flipTiles ?? []);
+    const [activeTiles, setActiveTiles] = useState(new Array(5).fill(false));
     const [iteration, setIteration] = useState(0);
     console.log(iteration);
 
     useEffect(() => {
-        setActiveTiles(result?.flipTiles ?? []);
+        setActiveTiles(new Array(5).fill(false));
         setIteration(0);
     }, [result]);
 
     useEffect(() => {
         if (iteration <= 5) {
             const interval = setInterval(() => {
-                setActiveTiles((prevActiveTiles) => {
-                    const newActiveTiles = [...prevActiveTiles];
+                setActiveTiles((tiles) => {
+                    const newActiveTiles = [...tiles];
                     newActiveTiles[iteration] = true;
                     return newActiveTiles;
                 });
-                setIteration((prevIteration) => prevIteration + 1);
+                setIteration((count) => count + 1);
             }, 200);
             return () => clearInterval(interval);
         }

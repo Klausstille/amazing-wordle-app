@@ -50,7 +50,6 @@ export const handleCheck = async (
                 letters: wordExists ? letters : [],
                 colors: wordExists ? colors : [],
                 rows: entry.rows,
-                flipTiles: new Array(5).fill(false),
             };
         } else {
             return entry;
