@@ -16,6 +16,7 @@ export interface Result {
     letters?: string[];
     colors?: ("bg-emerald-500" | "bg-[#4456e1]" | "bg-[#0d0d0d]")[];
     rows?: number;
+    flipTiles?: boolean[];
 }
 
 export interface Match {
@@ -30,6 +31,8 @@ function App() {
     const [rowCount, setRowCount] = useState<number>(0);
     const [allLetters, setAllLetters] = useState<string[]>([]);
     const [match, setMatch] = useState<Match[]>([]);
+
+    const [submitted, setSubmitted] = useState<boolean>(false);
 
     useEffect(() => {
         const getNewWords = async () => {

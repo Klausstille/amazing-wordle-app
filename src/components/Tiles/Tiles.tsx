@@ -1,11 +1,36 @@
 import { Result } from "../../App";
+import { useState, useEffect } from "react";
 
 interface TilesProps {
     result: Result;
 }
 
 export default function Tiles({ result }: TilesProps) {
+    const [activeTiles, setActiveTiles] = useState(result?.flipTiles ?? []);
+    const [iteration, setIteration] = useState(0);
+    console.log(iteration);
+
+    useEffect(() => {
+        setActiveTiles(result?.flipTiles ?? []);
+        setIteration(0);
+    }, [result]);
+
+    useEffect(() => {
+        if (iteration <= 5) {
+            const interval = setInterval(() => {
+                setActiveTiles((prevActiveTiles) => {
+                    const newActiveTiles = [...prevActiveTiles];
+                    newActiveTiles[iteration] = true;
+                    return newActiveTiles;
+                });
+                setIteration((prevIteration) => prevIteration + 1);
+            }, 200);
+            return () => clearInterval(interval);
+        }
+    }, [iteration]);
+
     const tiles = new Array(5).fill(null);
+
     return (
         <>
             {tiles.map((_, index) => {
@@ -13,7 +38,11 @@ export default function Tiles({ result }: TilesProps) {
                     <button
                         className={`tiles h-[18vw] py-0 text-white ${
                             result?.colors?.[index]
-                        } ${result?.colors?.[index] ? "active" : ""}`}
+                        } ${
+                            result?.colors?.[index] &&
+                            activeTiles[index] &&
+                            "active"
+                        }`}
                         key={index}
                     >
                         <p className="text-resp text-center font-bold">

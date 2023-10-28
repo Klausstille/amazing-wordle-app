@@ -17,6 +17,7 @@ export const handleInput = (
                       letters: [...letters, letter],
                       colors: [],
                       rows: rowCount,
+                      flipTiles: new Array(5).fill(false),
                   };
               } else {
                   return entry;
@@ -28,6 +29,7 @@ export const handleInput = (
                   letters: [letter],
                   colors: [],
                   rows: rowCount,
+                  flipTiles: new Array(5).fill(false),
               },
           ];
     return { newSetOfLetters, results };
