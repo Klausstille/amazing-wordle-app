@@ -186,7 +186,6 @@ function App() {
                             showStats={showStats}
                             showInfo={showInfo}
                             width={width}
-                            stats={stats}
                         />
                     </NavWrapper>
                     <Main>

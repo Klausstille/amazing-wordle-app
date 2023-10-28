@@ -1,12 +1,9 @@
-import { Stats } from "../../App";
-
 type NavProps = {
     setShowStats: (showStats: boolean) => void;
     setShowInfo: (showInfo: boolean) => void;
     showInfo: boolean;
     showStats: boolean;
     width: number;
-    stats: Stats[];
 };
 
 export default function Nav({
@@ -15,7 +12,6 @@ export default function Nav({
     showInfo,
     showStats,
     width,
-    stats,
 }: NavProps) {
     return (
         <ul>
@@ -28,7 +24,6 @@ export default function Nav({
             >
                 <img src="./info.svg" alt="info" className="icon" />
             </li>
-            {/* {stats.length > 0 && ( */}
             <li
                 onClick={() => {
                     setShowStats(!showStats);
@@ -37,7 +32,6 @@ export default function Nav({
             >
                 <img src="./stats.svg" alt="stats" className="icon" />
             </li>
-            {/* )} */}
         </ul>
     );
 }
