@@ -8,7 +8,7 @@ export const resetGame = (
     setWords: Dispatch<SetStateAction<string>>,
     setStats: Dispatch<SetStateAction<Stats[]>>,
     result: Result[],
-    stats?: Stats[]
+    stats: Stats[]
 ) => {
     setStats([
         ...(stats || []),

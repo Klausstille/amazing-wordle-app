@@ -131,7 +131,7 @@ function App() {
     return (
         <>
             <CSSTransition
-                in={showStats && stats && result}
+                in={showStats}
                 classNames="stats"
                 timeout={300}
                 unmountOnExit
