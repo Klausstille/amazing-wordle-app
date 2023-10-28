@@ -26,6 +26,7 @@ import GetWindowDimensions from "./components/helpers/getWindowDimensions.js";
 export interface Stats {
     game: Result[];
     isWin: boolean | null;
+    word: string | null;
 }
 export interface Result {
     letters?: string[];
@@ -46,7 +47,7 @@ function App() {
     const [match, setMatch] = useState<Match[]>([]);
     const [isIncorrectWord, setIncorrectWord] = useState<boolean>(false);
     const [stats, setStats] = useLocalStorageState<Stats[]>("game-stats", {
-        defaultValue: [{ game: [], isWin: null }],
+        defaultValue: [{ game: [], word: null, isWin: null }],
     });
     const [player, setPlayer] = useLocalStorageState<string>("name", {
         defaultValue: "",
@@ -102,7 +103,8 @@ function App() {
                         setWords,
                         setStats,
                         result,
-                        stats
+                        stats,
+                        words
                     );
                     setShowStats(true);
                     setRowCount(0);
@@ -173,7 +175,7 @@ function App() {
                 unmountOnExit
             >
                 <StatsWrapper>
-                    <Stats stats={stats} words={words} player={player} />
+                    <Stats stats={stats} player={player} />
                 </StatsWrapper>
             </CSSTransition>
 

@@ -8,12 +8,14 @@ export const resetGame = (
     setWords: Dispatch<SetStateAction<string>>,
     setStats: Dispatch<SetStateAction<Stats[]>>,
     result: Result[],
-    stats: Stats[]
+    stats: Stats[],
+    words: string
 ) => {
     setStats([
         ...(stats || []),
         {
             game: [...result],
+            word: words,
             isWin: isWin,
         },
     ]);

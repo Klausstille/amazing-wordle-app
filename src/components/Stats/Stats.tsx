@@ -4,11 +4,10 @@ import GuessDistribution from "./GuessDistribution";
 
 interface StatsProps {
     stats: Stats[];
-    words: string;
     player: string;
 }
 
-export default function Stat({ stats, words, player }: StatsProps) {
+export default function Stat({ stats, player }: StatsProps) {
     return (
         <>
             {stats.length > 1 &&
@@ -21,7 +20,7 @@ export default function Stat({ stats, words, player }: StatsProps) {
                             {" "}
                             The right answer was{" "}
                             <span className="font-black">
-                                {words.toUpperCase()}
+                                {stats[stats.length - 1]?.word?.toUpperCase()}
                             </span>
                         </h2>
                     </>
