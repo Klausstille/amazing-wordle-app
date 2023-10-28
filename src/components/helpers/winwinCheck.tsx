@@ -1,6 +1,6 @@
 import { Result } from "../../App";
 
-export const keyBoardCheck = (
+export const winwinCheck = (
     result: Result[],
     rowCount: number,
     words: string

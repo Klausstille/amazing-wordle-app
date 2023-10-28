@@ -9,7 +9,6 @@ interface TilesProps {
 export default function Tiles({ result, isIncorrectWord }: TilesProps) {
     const [activeTiles, setActiveTiles] = useState(new Array(5).fill(false));
     const [iteration, setIteration] = useState(0);
-    console.log(iteration);
 
     useEffect(() => {
         setActiveTiles(new Array(5).fill(false));

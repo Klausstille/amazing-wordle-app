@@ -4,20 +4,27 @@ import Header from "./components/Header/Header.js";
 import Main from "./components/Main/Main.js";
 import Tiles from "./components/Tiles/Tiles.js";
 import Board from "./components/Board/Board.js";
+import Stats from "./components/Stats/Stats.js";
+import { CSSTransition } from "react-transition-group";
+import StatsWrapper from "./components/StatsWrapper/StatsWrapper.js";
 import { fetchNewWords } from "./components/helpers/fetchWords.js";
 import { useEffect, useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import { handleCheck } from "./components/helpers/handleCheck.js";
 import { deleteInput } from "./components/helpers/deleteInput.js";
 import { handleInput } from "./components/helpers/handleInput.js";
-import { keyBoardCheck } from "./components/helpers/keyBoardCheck.js";
+import { winwinCheck } from "./components/helpers/winwinCheck.js";
 import { resetGame } from "./components/helpers/resetGame.js";
 
+export interface Stats {
+    game: Result[];
+    isWin: boolean;
+}
 export interface Result {
     letters?: string[];
     colors?: ("bg-emerald-500" | "bg-[#4456e1]" | "bg-[#0d0d0d]")[];
     rows?: number;
 }
-
 export interface Match {
     fullMatch: string[];
     halfMatch: string[];
@@ -31,6 +38,10 @@ function App() {
     const [allLetters, setAllLetters] = useState<string[]>([]);
     const [match, setMatch] = useState<Match[]>([]);
     const [isIncorrectWord, setIncorrectWord] = useState<boolean>(false);
+    const [stats, setStats] = useLocalStorageState<Stats[]>("game-stats", {
+        defaultValue: [],
+    });
+    const [showStats, setShowStats] = useState<boolean>(false);
 
     useEffect(() => {
         const getNewWords = async () => {
@@ -44,30 +55,37 @@ function App() {
     }, []);
 
     useEffect(() => {
-        const usedLetters = new Set();
-        result?.map((entry) => {
-            usedLetters.add(entry.letters?.join(""));
-        });
-        const letters = [];
-        for (const keyValue of usedLetters) {
-            letters.push(keyValue);
-        }
+        if (!result) return;
+        const usedLetters = new Set(
+            result.map((entry) => entry.letters?.join(""))
+        );
+        const letters = [...usedLetters];
         setAllLetters([...letters.join("")]);
 
-        const keyCheck = keyBoardCheck(result, rowCount, words);
-        if (keyCheck) {
-            const { matchingLetters, fullMatch } = keyCheck;
+        const winCheck = winwinCheck(result, rowCount, words);
+        if (winCheck) {
+            const { matchingLetters, fullMatch } = winCheck;
             setMatch(matchingLetters);
-            if (fullMatch.length === 5) {
-                const text = "yeah! you fuckin' won!";
-                resetGame(text, setRowCount, setResult, setWords);
-            }
-            if (rowCount === 6 && fullMatch.length !== 5) {
-                const text = "fuckin' loser! The answer was " + words;
-                resetGame(text, setRowCount, setResult, setWords);
+
+            if (
+                fullMatch.length === 5 ||
+                (rowCount === 6 && fullMatch.length !== 5)
+            ) {
+                setTimeout(() => {
+                    resetGame(
+                        fullMatch.length === 5,
+                        setWords,
+                        setStats,
+                        result,
+                        stats
+                    );
+                    setShowStats(true);
+                    setRowCount(0);
+                    setResult([]);
+                }, 2000);
             }
         }
-    }, [result, rowCount, words]);
+    }, [result]);
 
     const onUserInput = (letter: string) => {
         const userInput = handleInput(letter, letters, result, rowCount);
@@ -106,8 +124,27 @@ function App() {
         }
     };
 
+    const handleShowStats = () => {
+        setShowStats(!showStats);
+    };
+
     return (
         <>
+            <CSSTransition
+                in={showStats}
+                classNames="stats"
+                timeout={300}
+                unmountOnExit
+            >
+                <StatsWrapper>
+                    <Stats
+                        stats={stats}
+                        handleShowStats={handleShowStats}
+                        words={words}
+                    />
+                </StatsWrapper>
+            </CSSTransition>
+
             <Main>
                 <Board>
                     {[...Array(6)].map((_, index) => (
