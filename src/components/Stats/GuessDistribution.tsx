@@ -7,14 +7,14 @@ interface GuessDistributionProps {
 export default function GuessDistribution({ stats }: GuessDistributionProps) {
     if (!stats) return null;
 
-    const wonGames = stats.filter((game) => game.isWin);
-    const distribution = wonGames.map((game) => game.game.length);
+    const wonGames = stats?.filter((game) => game.isWin);
+    const distribution = wonGames?.map((game) => game.game.length);
 
     const width = (idx: number) => {
-        const distributionLength = distribution.filter((num) => num === idx);
-        const result = (distributionLength.length / wonGames.length) * 400;
+        const distributionLength = distribution?.filter((num) => num === idx);
+        const result = (distributionLength?.length / wonGames?.length) * 400;
         const relativeWidth = Math.min(250, result);
-        console.log(idx, Math.round(relativeWidth));
+        // console.log(idx, Math.round(relativeWidth));
         return Math.round(relativeWidth);
     };
 
