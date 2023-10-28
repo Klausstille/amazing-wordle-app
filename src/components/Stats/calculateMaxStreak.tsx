@@ -5,7 +5,7 @@ export const calculateMaxStreak = (stats: Stats[]) => {
     let currentStreakCount = 0;
 
     for (const stat of stats) {
-        if (stat.isWin) {
+        if (stat?.isWin) {
             currentStreakCount++;
             if (currentStreakCount > maxStreak) {
                 maxStreak = currentStreakCount;

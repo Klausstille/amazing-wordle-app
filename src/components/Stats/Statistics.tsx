@@ -19,13 +19,13 @@ export default function Statistics({ stats, player }: StatisticsProps) {
             <h3 className="font-black pt-8">STATISTICS</h3>
             <section className="grid grid-cols-4 gap-3">
                 <aside className="text-center">
-                    <h2>{stats.length}</h2>
+                    <h2>{stats.length - 1}</h2>
                     <p>Played</p>
                 </aside>
                 <aside className="text-center">
                     <h2>
                         {Math.round(
-                            (stats.filter((stat) => stat.isWin).length /
+                            (stats?.filter((stat) => stat?.isWin).length /
                                 stats.length) *
                                 100
                         )}

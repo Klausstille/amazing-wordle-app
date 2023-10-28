@@ -5,7 +5,7 @@ export const calculateCurrentStreak = (stats: Stats[]) => {
     let currentStreakCount = 0;
 
     for (const stat of stats) {
-        if (stat.isWin) {
+        if (stat?.isWin) {
             currentStreakCount++;
             if (currentStreakCount > currentStreak) {
                 currentStreak = currentStreakCount;
