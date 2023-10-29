@@ -1,10 +1,12 @@
 import { Result } from "../../App";
+const PonsAPIKey = import.meta.env.VITE_PonsAPIKey;
 
 export const handleCheck = async (
     result: Result[],
     rowCount: number,
     words: string,
-    letters: string[]
+    letters: string[],
+    lang: string
 ) => {
     if (result[rowCount]?.letters?.length !== 5) {
         return;
@@ -14,20 +16,47 @@ export const handleCheck = async (
         .toLowerCase();
 
     const checkWordExists = async (word: string) => {
+        const url = `/api/v1/dictionary?l=deen&q=${word}`;
+        const options = {
+            method: "GET",
+            headers: {
+                "X-Secret": PonsAPIKey,
+            },
+        };
         try {
-            const response = await fetch(
-                `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-            );
+            const response = await fetch(url, options);
             const data = await response.json();
-            if (data.title === "No Definitions Found") {
-                return false;
+            if (response.status === 200) {
+                const results = data.filter(
+                    (entry: Record<string, string>) => entry?.lang === lang
+                );
+                if (results.length > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
-                return true;
+                return false;
             }
         } catch (error) {
             console.log("error", error);
         }
     };
+    // const checkWordExists = async (word: string) => {
+    //     try {
+    //         const response = await fetch(
+    //             `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+    //         );
+    //         const data = await response.json();
+    //         if (data.title === "No Definitions Found") {
+    //             return false;
+    //         } else {
+    //             return true;
+    //         }
+    //     } catch (error) {
+    //         console.log("error", error);
+    //     }
+    // };
     const wordExists = await checkWordExists(word || "");
     const isIncorrectWord: boolean = wordExists ? false : true;
     const correctPosColor = "bg-emerald-500";

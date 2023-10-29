@@ -14,18 +14,25 @@ export default function Intro({ handleSubmit }: IntroProps) {
                 onSubmit={onSubmit}
                 className="flex flex-col justify-center items-center gap-3"
             >
-                <label className="flex flex-col justify-center items-center gap-8">
-                    <h1 className="w-full text-[10vw] font-avenir">
-                        Hi, there!
-                    </h1>
-                    <h2>What's your Name?</h2>
+                <label className="flex flex-col justify-center items-center gap-2">
+                    <h2 className="font-bold">Hi there!</h2>
+                    <h3 className="font-bold">What's your Name?</h3>
                     <input
                         type="text"
                         name="name"
-                        className="rounded-full w-1/2 h-10 py-2 text-black text-center text-xl"
+                        placeholder="Elara Serendipity"
+                        className="rounded-full py-0 h-8 w-[15vw] min-w-[150px] text-black text-center text-xl"
                     />
                 </label>
-                <button className="rounded-full  w-1/2 py-2 text-white text-center text-xl">
+                <h3 className="font-bold text-center">Chose your language</h3>{" "}
+                <select
+                    name="language"
+                    className="rounded-full py-0 h-8 text-center text-md w-[15vw] min-w-[150px] bg-blue-500 text-white"
+                >
+                    <option value="english">English</option>
+                    <option value="german">German</option>
+                </select>
+                <button className="rounded-full mt-5 py-0 h-8 w-[15vw] min-w-[150px] text-white text-center text-md bg-emerald-500">
                     Let's go!
                 </button>
             </form>
