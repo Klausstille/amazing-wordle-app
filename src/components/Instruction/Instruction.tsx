@@ -75,8 +75,15 @@ export default function Instruction() {
                 </h3>
             </section>
             <p className="font-bold pt-4 tracking-wide text-center">
-                Built with much ❤️ by Klaus Stille <br></br>With React (Vite),
-                Typescript and TailwindCSS
+                Built with much ❤️ by{" "}
+                <a
+                    href="http://stillestudio.com"
+                    target="blank"
+                    className="text-white hover:text-white"
+                >
+                    Klaus Stille
+                </a>{" "}
+                <br></br>With React (Vite), Typescript and TailwindCSS
             </p>
         </>
     );
