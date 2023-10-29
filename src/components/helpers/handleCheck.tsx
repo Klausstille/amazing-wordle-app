@@ -1,5 +1,5 @@
 import { Result } from "../../App";
-const VITE_PonsAPIKey = import.meta.env.VITE_PonsAPIKey;
+const VITE_PonsAPIToken = import.meta.env.VITE_PonsAPIToken;
 
 export const handleCheck = async (
     result: Result[],
@@ -20,7 +20,7 @@ export const handleCheck = async (
         const options = {
             method: "GET",
             headers: {
-                "X-Secret": VITE_PonsAPIKey,
+                "X-Secret": VITE_PonsAPIToken,
             },
         };
         try {
