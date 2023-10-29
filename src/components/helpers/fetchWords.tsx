@@ -1,4 +1,4 @@
-// const { RapidAPIKey } = import.meta.env.VITE_RapidAPIKey;
+// const RapidAPIKey = import.meta.env.VITE_RapidAPIKey;
 const englishWordsArray = [
     "Apple",
     "Table",

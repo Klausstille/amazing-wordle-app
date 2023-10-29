@@ -1,5 +1,5 @@
 import { Result } from "../../App";
-const PonsAPIKey = import.meta.env.VITE_PonsAPIKey;
+const VITE_PonsAPIKey = import.meta.env.VITE_PonsAPIKey;
 
 export const handleCheck = async (
     result: Result[],
@@ -11,16 +11,17 @@ export const handleCheck = async (
     if (result[rowCount]?.letters?.length !== 5) {
         return;
     }
+
     const word: string | undefined = result[rowCount]?.letters
         ?.join("")
         .toLowerCase();
 
     const checkWordExists = async (word: string) => {
-        const url = `/api/v1/dictionary?l=deen&q=${word}`;
+        const url = `https://api.pons.com/v1/dictionary?l=deen&q=${word}`;
         const options = {
             method: "GET",
             headers: {
-                "X-Secret": PonsAPIKey,
+                "X-Secret": VITE_PonsAPIKey,
             },
         };
         try {
