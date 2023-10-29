@@ -4,8 +4,7 @@
 
 @font-face {
     font-family: "Clash Display Semibold";
-    src: url("./assets/fonts/clash-display/ClashDisplay-Semibold.woff")
-        format("woff");
+    src: url("./fonts/clash-display/ClashDisplay-Semibold.woff") format("woff");
 }
 
 :root {
