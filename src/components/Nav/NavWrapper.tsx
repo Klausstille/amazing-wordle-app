@@ -6,6 +6,8 @@ type NavWrapperProps = {
 
 export default function NavWrapper({ children }: NavWrapperProps) {
     return (
-        <section className="nav fixed top-2 right-2 z-30">{children}</section>
+        <section className="nav fixed py-2 px-2 z-30 w-full bg-[#202020] flex justify-between">
+            {children}
+        </section>
     );
 }

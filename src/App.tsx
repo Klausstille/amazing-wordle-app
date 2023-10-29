@@ -253,7 +253,7 @@ function App() {
                         </Footer>
                     </Main>
                     <Header>
-                        <h1 className="sm:leading-[28rem] leading-[10rem] self-center font-avenir text-[40vw]">
+                        <h1 className="self-center font-avenir text-[35vw] pt-20">
                             Wordle
                         </h1>
                     </Header>

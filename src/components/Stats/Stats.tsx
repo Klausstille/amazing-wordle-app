@@ -21,12 +21,12 @@ export default function Stat({ stats, player, lang }: StatsProps) {
                                 <h2 className="font-light">YOU LOST!</h2>{" "}
                                 <h2 className="font-bold">
                                     {" "}
-                                    The right answer was:{" "}
-                                    <span className="font-black">
+                                    The answer was
+                                    <h2 className="font-black">
                                         {stats[
                                             stats.length - 1
                                         ]?.word?.toUpperCase()}
-                                    </span>
+                                    </h2>
                                 </h2>
                             </>
                         ))}{" "}
@@ -41,12 +41,12 @@ export default function Stat({ stats, player, lang }: StatsProps) {
                                 <h2 className="font-light">LEIDER NICHT...</h2>{" "}
                                 <h2 className="font-bold">
                                     {" "}
-                                    Die richtige Antwort war:{" "}
-                                    <span className="font-black">
+                                    Die Antwort war
+                                    <h2 className="font-black">
                                         {stats[
                                             stats.length - 1
                                         ]?.word?.toUpperCase()}
-                                    </span>
+                                    </h2>
                                 </h2>
                             </>
                         ))}{" "}

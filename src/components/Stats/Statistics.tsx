@@ -15,10 +15,12 @@ export default function Statistics({ stats, player, lang }: StatisticsProps) {
         <>
             {lang === "en" ? (
                 <>
-                    <h2 className="font-black pt-8 text-center">
-                        Hi {player}
-                        <p>Good game!</p>
-                    </h2>
+                    {stats.length <= 1 && (
+                        <h2 className="font-black pt-8 text-center">
+                            Hi {player}
+                            <p>Good game!</p>
+                        </h2>
+                    )}
                     <h3 className="font-black pt-8">STATISTICS</h3>
                     <section className="grid grid-cols-4 gap-3">
                         <aside className="text-center">
@@ -52,10 +54,12 @@ export default function Statistics({ stats, player, lang }: StatisticsProps) {
                 </>
             ) : (
                 <>
-                    <h2 className="font-black pt-8 text-center">
-                        Hallo {player}
-                        <p>Viel Spaß!</p>
-                    </h2>
+                    {stats.length <= 1 && (
+                        <h2 className="font-black pt-8 text-center">
+                            Hallo {player}
+                            <p>Viel Spaß!</p>
+                        </h2>
+                    )}
                     <h3 className="font-black pt-8">STATISTICS</h3>
                     <section className="grid grid-cols-4 gap-3">
                         <aside className="text-center">

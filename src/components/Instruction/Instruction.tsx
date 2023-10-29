@@ -6,7 +6,9 @@ export default function Instruction({ lang }: InstructionProps) {
         <>
             {lang === "en" ? (
                 <>
-                    <h1 className="w-full text-[10vw] font-avenir">Wordle</h1>
+                    <h1 className="w-full lg:text-[6rem] text-[2rem] pt-2 font-avenir font-thin">
+                        MyWordle
+                    </h1>
                     <h2 className="font-black pt-8 text-center">How To Play</h2>
                     <h3 className="font-black">Guess the word in 6 tries.</h3>
                     <h3 className="font-bold">
@@ -93,22 +95,25 @@ export default function Instruction({ lang }: InstructionProps) {
                 </>
             ) : (
                 <>
-                    <h1 className="w-full text-[10vw] font-avenir">Wordle</h1>
+                    <h1 className="w-full lg:text-[6rem] text-[2rem] pt-2 font-avenir font-thin">
+                        MyWordle
+                    </h1>
                     <h2 className="font-black pt-8 text-center">
                         So spielt man
                     </h2>
                     <h3 className="font-black">
                         Rate das Wort in 6 Versuchen.
                     </h3>
-                    <h3 className="font-bold">
-                        Jeder Versuch muss ein gültiges 5-Buchstaben-Wort sein.
+                    <h3 className="font-bold text-center">
+                        Jeder Versuch muss ein gültiges <br></br>{" "}
+                        5-Buchstaben-Wort sein.
                     </h3>
                     <h3 className="font-bold text-center">
-                        Die Farbe der Kacheln ändert sich, um anzuzeigen, wie{" "}
-                        <br></br> nah Ihr Tipp am gesuchten Wort ist.
+                        Die Farbe der Kacheln zeigt an, wie nah <br></br> Dein
+                        Tipp am gesuchten Wort ist.
                     </h3>
                     <section className="flex flex-col justify-center text-center">
-                        <h3 className="font-black py-3">EXAMPLES</h3>
+                        <h3 className="font-black py-3">BEISPIELE</h3>
                         <aside className="text-center flex gap-1 justify-center">
                             <button className="w-10 h-10 text-white bg-emerald-500 text-center text-sm">
                                 T
