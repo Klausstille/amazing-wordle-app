@@ -8,10 +8,6 @@ export default {
                 input: "repeat(10, 1fr)",
                 "input-mobile": "repeat(8, 1fr)",
             },
-            fontSize: {
-                tiles: "2.5rem",
-                resp: "3.5vw",
-            },
         },
 
         fontFamily: {

@@ -45,7 +45,7 @@ export default function Tiles({ result, isIncorrectWord }: TilesProps) {
                         }`}
                         key={index}
                     >
-                        <p className="text-resp text-center font-bold font-avenir">
+                        <p className="sm:text-[3rem] text-[1.5rem] text-center font-regular font-avenir">
                             {result?.letters?.[index]}
                         </p>
                     </button>
