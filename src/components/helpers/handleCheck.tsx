@@ -1,5 +1,5 @@
 import { Result } from "../../App";
-const VITE_PonsAPIToken = import.meta.env.VITE_PonsAPIToken;
+// const VITE_PonsAPIToken = import.meta.env.VITE_PonsAPIToken;
 
 export const handleCheck = async (
     result: Result[],
@@ -16,15 +16,17 @@ export const handleCheck = async (
         .toLowerCase();
 
     const checkWordExists = async (word: string) => {
-        const url = `https://api.pons.com/v1/dictionary?l=deen&q=${word}`;
-        const options = {
-            method: "GET",
-            headers: {
-                "X-Secret": VITE_PonsAPIToken,
-            },
-        };
+        const url = `/api/dictionary?word=${word}`;
+        console.log("URL", url);
+
+        // const options = {
+        //     method: "GET",
+        //     headers: {
+        //         "X-Secret": VITE_PonsAPIToken,
+        //     },
+        // };
         try {
-            const response = await fetch(url, options);
+            const response = await fetch(url);
             const data = await response.json();
             if (response.status === 200) {
                 const results = data.filter(
