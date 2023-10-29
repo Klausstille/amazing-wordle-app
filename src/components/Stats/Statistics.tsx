@@ -26,14 +26,18 @@ export default function Statistics({ stats, player, lang }: StatisticsProps) {
                             <p>Played</p>
                         </aside>
                         <aside className="text-center">
-                            <h2>
-                                {Math.round(
-                                    (stats?.filter((stat) => stat?.isWin)
-                                        .length /
-                                        (stats.length - 1)) *
-                                        100
-                                )}
-                            </h2>
+                            {stats.length > 1 ? (
+                                <h2>
+                                    {Math.round(
+                                        (stats?.filter((stat) => stat?.isWin)
+                                            .length /
+                                            (stats.length - 1)) *
+                                            100
+                                    )}
+                                </h2>
+                            ) : (
+                                <h2>0</h2>
+                            )}
                             <p>Win %</p>
                         </aside>
                         <aside className="text-center">
@@ -59,14 +63,18 @@ export default function Statistics({ stats, player, lang }: StatisticsProps) {
                             <p>Spiele</p>
                         </aside>
                         <aside className="text-center">
-                            <h2>
-                                {Math.round(
-                                    (stats?.filter((stat) => stat?.isWin)
-                                        .length /
-                                        (stats.length - 1)) *
-                                        100
-                                )}
-                            </h2>
+                            {stats.length > 1 ? (
+                                <h2>
+                                    {Math.round(
+                                        (stats?.filter((stat) => stat?.isWin)
+                                            .length /
+                                            (stats.length - 1)) *
+                                            100
+                                    )}
+                                </h2>
+                            ) : (
+                                <h2>0</h2>
+                            )}
                             <p>Gewonnen %</p>
                         </aside>
                         <aside className="text-center">

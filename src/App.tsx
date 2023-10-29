@@ -93,8 +93,6 @@ function App() {
         setRowCount(0);
     }, [lang]);
 
-    console.log("words", words);
-
     useEffect(() => {
         if (!result) return;
         const usedLetters = new Set(
