@@ -13,9 +13,10 @@ export default {
                 resp: "3.5vw",
             },
         },
+
         fontFamily: {
             avenir: "Avenir Next",
-            clash: "Clash Display Semibold",
+            clash: ["Clash Display Semibold", "sans"],
             inter: fontInter,
         },
     },

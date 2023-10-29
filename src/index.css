@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: "Clash Display Semibold";
+    src: url("./assets/fonts/clash-display/ClashDisplay-Semibold.woff")
+        format("truetype");
+}
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
