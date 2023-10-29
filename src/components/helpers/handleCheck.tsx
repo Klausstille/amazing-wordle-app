@@ -11,13 +11,12 @@ export const handleCheck = async (
     if (result[rowCount]?.letters?.length !== 5) {
         return;
     }
-
     const word: string | undefined = result[rowCount]?.letters
         ?.join("")
         .toLowerCase();
 
     const checkWordExists = async (word: string) => {
-        const url = `https://api.pons.com/v1/dictionary?l=deen&q=${word}`;
+        const url = `/api/v1/dictionary?l=deen&q=${word}`;
         const options = {
             method: "GET",
             headers: {
