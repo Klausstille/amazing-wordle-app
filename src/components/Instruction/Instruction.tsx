@@ -3,7 +3,7 @@ export default function Instruction() {
         <>
             <h1 className="w-full text-[10vw] font-avenir">Wordle</h1>
             <h2 className="font-black pt-8 text-center">How To Play</h2>
-            <h3 className="font-black">Guess the Wordle in 6 tries.</h3>
+            <h3 className="font-black">Guess the word in 6 tries.</h3>
             <h3 className="font-bold">
                 Each guess must be a valid 5-letter word.
             </h3>
@@ -74,7 +74,7 @@ export default function Instruction() {
                     No letter in the word in any spot.
                 </h3>
             </section>
-            <p className="font-bold pt-4 tracking-widest text-center">
+            <p className="font-bold pt-4 tracking-wide text-center">
                 Built with much ❤️ by Klaus Stille <br></br>With React (Vite),
                 Typescript and TailwindCSS
             </p>

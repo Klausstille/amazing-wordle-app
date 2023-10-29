@@ -37,6 +37,8 @@ export default function Tiles({ result, isIncorrectWord }: TilesProps) {
                 return (
                     <button
                         className={`tiles h-[18vw] lg:h-[9vw] py-0 text-white ${
+                            result?.colors?.[index] &&
+                            activeTiles[index] &&
                             result?.colors?.[index]
                         } ${
                             result?.colors?.[index] && activeTiles[index]
