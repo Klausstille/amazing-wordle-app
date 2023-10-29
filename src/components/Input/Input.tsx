@@ -54,11 +54,11 @@ export default function Input({
                         onClick={() => handleUserInput(letter)}
                         className={`input letter ${
                             (match[0]?.fullMatch?.includes(letter) &&
-                                "bg-emerald-500") ||
+                                "hover:bg-emerald-500 bg-emerald-500") ||
                             (match[0]?.halfMatch?.includes(letter) &&
-                                "bg-[#4456e1]") ||
+                                "hover:bg-[#4456e1] bg-[#4456e1]") ||
                             (allLetters?.includes(letter) &&
-                                "bg-neutral-950") ||
+                                "hover:bg-neutral-950 bg-neutral-950") ||
                             "bg-neutral-800"
                         } relative font-avenir`}
                     >
