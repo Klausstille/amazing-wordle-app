@@ -27,6 +27,7 @@ export interface Stats {
     game: Result[];
     isWin: boolean | null;
     word: string | null;
+    lang: string | null;
 }
 export interface Result {
     letters?: string[];
@@ -47,9 +48,12 @@ function App() {
     const [match, setMatch] = useState<Match[]>([]);
     const [isIncorrectWord, setIncorrectWord] = useState<boolean>(false);
     const [stats, setStats] = useLocalStorageState<Stats[]>("game-stats", {
-        defaultValue: [{ game: [], word: null, isWin: null }],
+        defaultValue: [{ game: [], word: null, lang: null, isWin: null }],
     });
-    const [player, setPlayer] = useLocalStorageState<string>("name", {
+    const [player, setPlayer] = useLocalStorageState<string>("player", {
+        defaultValue: "",
+    });
+    const [lang, setLang] = useLocalStorageState<string>("lang", {
         defaultValue: "",
     });
     const { width } = GetWindowDimensions();
@@ -58,11 +62,15 @@ function App() {
         width < 1024 ? false : true
     );
 
-    const handleSubmitName = (evt: SubmitEvent) => {
+    const handleSubmitNameAndLang = (evt: SubmitEvent) => {
         evt.preventDefault();
-        const nameInput = (
-            evt.target as HTMLFormElement
-        ).querySelector<HTMLInputElement>('input[name="name"]');
+        const form = evt.target as HTMLFormElement;
+        const selectedLanguage: string = (
+            form.elements as unknown as HTMLFormElement
+        ).language.value;
+        selectedLanguage === "english" ? setLang("en") : setLang("de");
+        const nameInput =
+            form.querySelector<HTMLInputElement>('input[name="name"]');
         if (nameInput) {
             const name: string = nameInput.value;
             setPlayer(name);
@@ -71,14 +79,21 @@ function App() {
 
     useEffect(() => {
         const getNewWords = async () => {
-            const word: string | void = await fetchNewWords();
+            const word: string | void = await fetchNewWords({ lang });
             if (typeof word === "string") {
                 setWords(word);
             }
         };
         getNewWords();
         console.log("Cheater... 🤥");
-    }, []);
+    }, [lang]);
+
+    useEffect(() => {
+        setResult([]);
+        setRowCount(0);
+    }, [lang]);
+
+    console.log("words", words);
 
     useEffect(() => {
         if (!result) return;
@@ -104,7 +119,8 @@ function App() {
                         setStats,
                         result,
                         stats,
-                        words
+                        words,
+                        lang
                     );
                     setShowStats(true);
                     setRowCount(0);
@@ -133,7 +149,13 @@ function App() {
     };
 
     const onHandleCheck = async () => {
-        const checkResult = await handleCheck(result, rowCount, words, letters);
+        const checkResult = await handleCheck(
+            result,
+            rowCount,
+            words,
+            letters,
+            lang
+        );
         if (checkResult) {
             const {
                 checkedResults,
@@ -174,7 +196,7 @@ function App() {
                 unmountOnExit
             >
                 <IntroWrapper>
-                    <Intro handleSubmit={handleSubmitName} />
+                    <Intro handleSubmit={handleSubmitNameAndLang} />
                 </IntroWrapper>
             </CSSTransition>
             <CSSTransition
@@ -184,7 +206,7 @@ function App() {
                 unmountOnExit
             >
                 <StatsWrapper handleShowStats={handleShowStats}>
-                    <Stats stats={stats} player={player} />
+                    <Stats stats={stats} player={player} lang={lang} />
                 </StatsWrapper>
             </CSSTransition>
 
@@ -197,6 +219,8 @@ function App() {
                             showStats={showStats}
                             showInfo={showInfo}
                             width={width}
+                            lang={lang}
+                            setLang={setLang}
                         />
                     </NavWrapper>
                     <Main>
@@ -207,7 +231,7 @@ function App() {
                             unmountOnExit
                         >
                             <InstructionWrapper handleShowInfo={handleShowInfo}>
-                                <Instruction />
+                                <Instruction lang={lang} />
                             </InstructionWrapper>
                         </CSSTransition>
                         <Board>

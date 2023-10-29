@@ -1,5 +1,5 @@
 // const { RapidAPIKey } = import.meta.env.VITE_RapidAPIKey;
-const wordsArray = [
+const englishWordsArray = [
     "Apple",
     "Table",
     "Chair",
@@ -50,11 +50,107 @@ const wordsArray = [
     "Night",
     "Crown",
 ];
+const germanWordsArray = [
+    "Apfel",
+    "Wolke",
+    "Tiger",
+    "Socke",
+    "Hafen",
+    "Eiche",
+    "Zebra",
+    "Fisch",
+    "Liebe",
+    "Schlaf",
+    "Reise",
+    "Rente",
+    "Kabel",
+    "Kugel",
+    "Melon",
+    "Glanz",
+    "Motor",
+    "Brief",
+    "Seife",
+    "Hunde",
+    "Milch",
+    "Venus",
+    "Seide",
+    "Ernte",
+    "Tasse",
+    "Decke",
+    "Fluss",
+    "Kreis",
+    "Messe",
+    "Mauer",
+    "Jause",
+    "Tisch",
+    "Flote",
+    "Kiste",
+    "Vogel",
+    "Tanne",
+    "Pferd",
+    "Kette",
+    "Lampe",
+    "Wagen",
+    "Qualm",
+    "Kette",
+    "Sicht",
+    "Zunge",
+    "Hände",
+    "Pfand",
+    "Karte",
+    "Fabel",
+    "Pfote",
+    "Anker",
+    "Salat",
+    "Recht",
+    "Brust",
+    "Pflug",
+    "Laser",
+    "Tinte",
+    "Faden",
+    "Traum",
+    "Kreuz",
+    "Kiosk",
+    "Glanz",
+    "Hertz",
+    "Brand",
+    "Schal",
+    "Clown",
+    "Stift",
+    "Feder",
+    "Hands",
+    "Tafel",
+    "Unrat",
+    "Quark",
+    "Prinz",
+    "Ruder",
+    "Flirt",
+    "Sorge",
+    "Ernte",
+    "Knabe",
+    "Kugel",
+    "Saite",
+    "Teich",
+    "Zange",
+];
 
-export const fetchNewWords = async () => {
-    const randomWord =
-        wordsArray[Math.floor(Math.random() * wordsArray.length)];
-    return randomWord;
+interface fetchProps {
+    lang: string;
+}
+export const fetchNewWords = async ({ lang }: fetchProps) => {
+    if (lang === "en") {
+        const randomWord =
+            englishWordsArray[
+                Math.floor(Math.random() * englishWordsArray.length)
+            ];
+        return randomWord;
+    } else if (lang === "de") {
+        const randomWord =
+            germanWordsArray[
+                Math.floor(Math.random() * germanWordsArray.length)
+            ];
+        return randomWord;
+    }
 };
 
 // export const fetchNewWords = async () => {

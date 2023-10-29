@@ -9,7 +9,8 @@ export const resetGame = (
     setStats: Dispatch<SetStateAction<Stats[]>>,
     result: Result[],
     stats: Stats[],
-    words: string
+    words: string,
+    lang: string
 ) => {
     setStats([
         ...(stats || []),
@@ -17,11 +18,12 @@ export const resetGame = (
             game: [...result],
             word: words,
             isWin: isWin,
+            lang: lang,
         },
     ]);
 
     const getNewWords = async () => {
-        const word: string | void = await fetchNewWords();
+        const word: string | void = await fetchNewWords({ lang });
         if (typeof word === "string") {
             setWords(word);
         }

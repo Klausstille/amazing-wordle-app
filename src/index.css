@@ -162,9 +162,12 @@ button.buzz {
 
 ul {
     display: flex;
-    gap: 5px;
+    gap: 15px;
 }
-
+select {
+    border: none;
+    outline: none;
+}
 .icon {
     height: 30px;
     cursor: pointer;
