@@ -156,6 +156,15 @@ function App() {
         width < 1024 && setShowInfo(false);
     }, [width]);
 
+    const handleShowStats = () => {
+        setShowStats(!showStats);
+    };
+    const handleShowInfo = () => {
+        if (width < 1024) {
+            setShowInfo(!showInfo);
+        }
+    };
+
     return (
         <>
             <CSSTransition
@@ -174,7 +183,7 @@ function App() {
                 timeout={300}
                 unmountOnExit
             >
-                <StatsWrapper>
+                <StatsWrapper handleShowStats={handleShowStats}>
                     <Stats stats={stats} player={player} />
                 </StatsWrapper>
             </CSSTransition>
@@ -197,7 +206,7 @@ function App() {
                             timeout={300}
                             unmountOnExit
                         >
-                            <InstructionWrapper>
+                            <InstructionWrapper handleShowInfo={handleShowInfo}>
                                 <Instruction />
                             </InstructionWrapper>
                         </CSSTransition>

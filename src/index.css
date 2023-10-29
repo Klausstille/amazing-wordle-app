@@ -162,12 +162,17 @@ button.buzz {
 
 ul {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
 
 .icon {
-    width: 30px;
+    height: 30px;
     cursor: pointer;
+}
+.stats {
+    height: 31px;
+    padding: 1px;
+    margin-top: -0.5px;
 }
 @media screen and (max-width: 768px) {
     button {

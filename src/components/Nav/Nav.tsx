@@ -30,7 +30,7 @@ export default function Nav({
                     width < 1024 && showInfo && setShowInfo(!showInfo);
                 }}
             >
-                <img src="./stats.svg" alt="stats" className="icon" />
+                <img src="./stats.svg" alt="stats" className="stats" />
             </li>
         </ul>
     );
