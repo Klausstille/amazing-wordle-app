@@ -26,7 +26,7 @@ export default function Statistics({ stats, player }: StatisticsProps) {
                     <h2>
                         {Math.round(
                             (stats?.filter((stat) => stat?.isWin).length /
-                                stats.length) *
+                                (stats.length - 1)) *
                                 100
                         )}
                     </h2>
