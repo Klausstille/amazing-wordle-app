@@ -16,9 +16,9 @@ export const handleCheck = async (
         .toLowerCase();
 
     const checkWordExists = async (word: string) => {
-        // const url = `/api/dictionary?word=${word}`;
+        const url = `/api/dictionary?word=${word}`;
         // const url = `https://api.pons.com/v1/dictionary?l=deen&q=${word}`;
-        const url = `/api/v1/dictionary?l=deen&q=${word}`;
+        // const url = `/api/v1/dictionary?l=deen&q=${word}`;
         const options = {
             method: "GET",
             headers: {

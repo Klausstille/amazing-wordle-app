@@ -1,5 +1,3 @@
-const VITE_PonsAPIToken = import.meta.env.VITE_PonsAPIToken;
-
 export default async function handler(req, res) {
     try {
         const { word } = req.query;
@@ -7,7 +5,7 @@ export default async function handler(req, res) {
         const options = {
             method: "GET",
             headers: {
-                "X-Secret": VITE_PonsAPIToken,
+                "X-Secret": process.env.VITE_PonsAPIToken,
             },
         };
         const response = await fetch(url, options);
