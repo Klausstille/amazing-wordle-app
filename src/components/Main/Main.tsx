@@ -6,7 +6,7 @@ type MainProps = {
 
 export default function Main({ children }: MainProps) {
     return (
-        <section className="main grid py-10 lg:grid-cols-2 grid-cols-1 justify-center antialiased">
+        <section className="main grid py-10 lg:grid-cols-2 grid-cols-1 justify-center">
             {children}
         </section>
     );

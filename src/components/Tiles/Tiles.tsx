@@ -32,11 +32,11 @@ export default function Tiles({ result, isIncorrectWord }: TilesProps) {
     const tiles = new Array(5).fill(null);
 
     return (
-        <>
+        <section className="lg:w-[32vw] md:w-[70vw] w-[80vw] grid grid-cols-5 gap-1 font-inter">
             {tiles.map((_, index) => {
                 return (
                     <button
-                        className={`tiles h-[18vw] lg:h-[9vw] py-0 text-white ${
+                        className={`tiles h-[15vw] sm:h-[14vw] lg:h-[6vw] py-2 text-white ${
                             result?.colors?.[index] &&
                             activeTiles[index] &&
                             result?.colors?.[index]
@@ -47,12 +47,12 @@ export default function Tiles({ result, isIncorrectWord }: TilesProps) {
                         }`}
                         key={index}
                     >
-                        <p className="sm:text-[3rem] text-[1.5rem] text-center font-regular font-avenir">
+                        <p className="sm:text-[3rem] md:text-[2rem] text-[1.5rem] text-center font-regular font-avenir">
                             {result?.letters?.[index]}
                         </p>
                     </button>
                 );
             })}
-        </>
+        </section>
     );
 }
