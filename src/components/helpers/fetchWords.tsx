@@ -1,4 +1,5 @@
 // const RapidAPIKey = import.meta.env.VITE_RapidAPIKey;
+
 const englishWordsArray = [
     "Apple",
     "Table",
@@ -83,7 +84,6 @@ const germanWordsArray = [
     "Mauer",
     "Jause",
     "Tisch",
-    "Flote",
     "Kiste",
     "Vogel",
     "Tanne",

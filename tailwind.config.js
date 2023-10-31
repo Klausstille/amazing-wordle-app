@@ -6,7 +6,7 @@ export default {
         extend: {
             gridTemplateColumns: {
                 input: "repeat(10, 1fr)",
-                "input-mobile": "repeat(8, 1fr)",
+                "input-mobile": "repeat(10, 1fr)",
             },
         },
 
