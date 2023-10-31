@@ -1,5 +1,4 @@
 import { Result } from "../../App";
-const VITE_PonsAPIToken = import.meta.env.VITE_PonsAPIToken;
 
 export const handleCheck = async (
     result: Result[],
@@ -17,16 +16,8 @@ export const handleCheck = async (
 
     const checkWordExists = async (word: string) => {
         const url = `/api/dictionary?word=${word}`;
-        // const url = `https://api.pons.com/v1/dictionary?l=deen&q=${word}`;
-        // const url = `/api/v1/dictionary?l=deen&q=${word}`;
-        const options = {
-            method: "GET",
-            headers: {
-                "X-Secret": VITE_PonsAPIToken,
-            },
-        };
         try {
-            const response = await fetch(url, options);
+            const response = await fetch(url);
             const data = await response.json();
             if (response.status === 200) {
                 const results = data.filter(
@@ -44,26 +35,11 @@ export const handleCheck = async (
             console.log("error", error);
         }
     };
-    // const checkWordExists = async (word: string) => {
-    //     try {
-    //         const response = await fetch(
-    //             `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-    //         );
-    //         const data = await response.json();
-    //         if (data.title === "No Definitions Found") {
-    //             return false;
-    //         } else {
-    //             return true;
-    //         }
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-    // };
     const wordExists = await checkWordExists(word || "");
     const isIncorrectWord: boolean = wordExists ? false : true;
     const correctPosColor = "bg-emerald-500";
-    const wrongPosColor = "bg-[#4456e1]";
-    const wrongLetterColor = "bg-[#0d0d0d]";
+    const wrongPosColor = "bg-blue-500";
+    const wrongLetterColor = "bg-neutral-950";
     const colors = result[rowCount]?.letters?.map((letter, index) => {
         if (letter == words.toUpperCase()[index]) {
             return correctPosColor;

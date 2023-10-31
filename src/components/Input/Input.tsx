@@ -20,13 +20,48 @@ export default function Input({
 }: InputProps) {
     const [letters, setLetters] = useState<string[]>([]);
     const main = document.body.querySelector(".main");
+
     useEffect(() => {
-        const newLetters = [];
-        for (let i = 65; i <= 90; i++) {
-            newLetters.push(String.fromCharCode(i));
-        }
-        setLetters(newLetters);
+        const qwertzLayout = [
+            "Q",
+            "W",
+            "E",
+            "R",
+            "T",
+            "Z",
+            "U",
+            "I",
+            "O",
+            "P",
+            "A",
+            "S",
+            "D",
+            "F",
+            "G",
+            "H",
+            "J",
+            "K",
+            "L",
+            "Y",
+            "X",
+            "C",
+            "V",
+            "B",
+            "N",
+            "M",
+        ];
+        setLetters(qwertzLayout);
     }, []);
+
+    const buttonClasses =
+        "input grid items-center justify-center relative font-avenir sm:h-10 h-14";
+
+    const colors = {
+        fullMatch: "hover:bg-emerald-500 bg-emerald-500",
+        halfMatch: "hover:bg-blue-500 bg-blue-500",
+        neutral: "hover:bg-neutral-950 bg-neutral-950",
+        default: "hover:bg-neutral-800 bg-neutral-800",
+    };
 
     useEffect(() => {
         const handleKeyDown = (evt: KeyboardEvent) => {
@@ -48,43 +83,40 @@ export default function Input({
     return (
         <>
             {letters?.map((letter) => {
+                const isHalfMatch = match[0]?.allHalfMatch?.includes(letter);
+                const isFullMatch = match[0]?.allFullMatch?.includes(letter);
+                const isNoMatch = allLetters?.includes(letter);
                 return (
                     <button
                         key={letter}
                         onClick={() => handleUserInput(letter)}
-                        className={`input letter ${
-                            (match[0]?.fullMatch?.includes(letter) &&
-                                "hover:bg-emerald-500 bg-emerald-500") ||
-                            (match[0]?.halfMatch?.includes(letter) &&
-                                "hover:bg-[#4456e1] bg-[#4456e1]") ||
-                            (allLetters?.includes(letter) &&
-                                "hover:bg-neutral-950 bg-neutral-950") ||
-                            "bg-neutral-800"
-                        } relative font-avenir`}
+                        className={`${
+                            (isHalfMatch && colors["halfMatch"]) ||
+                            (isFullMatch && colors["fullMatch"]) ||
+                            (isNoMatch && colors["neutral"]) ||
+                            colors["default"]
+                        } ${buttonClasses}`}
                     >
-                        {match[0]?.fullMatch?.includes(letter) && (
-                            <>
-                                <span>{letter}</span>
-                                <span className="text-[10px] absolute top-0 right-1 sm:top-1 sm:right-2">
-                                    {words.toUpperCase().indexOf(letter) + 1}
-                                </span>
-                            </>
-                        )}
-                        {!match[0]?.fullMatch?.includes(letter) && letter}
+                        <span>{letter}</span>
+                        <span className="text-[10px] absolute top-1 right-2">
+                            {isFullMatch
+                                ? words.toUpperCase().indexOf(letter) + 1
+                                : ""}
+                        </span>
                     </button>
                 );
             })}
             <button
-                className="input grid col-span-2 bg-neutral-900"
+                className={`${buttonClasses} col-span-2 ${colors["default"]}`}
                 onClick={handleDeleteInput}
             >
-                delete
+                <img src="./delete.svg" alt="delete" className="delete" />
             </button>
             <button
-                className="input grid col-span-2 bg-neutral-900"
+                className={`${buttonClasses} col-span-2 ${colors["default"]}`}
                 onClick={handleInputCheck}
             >
-                submit
+                ENTER
             </button>
         </>
     );

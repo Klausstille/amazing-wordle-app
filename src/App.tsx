@@ -31,16 +31,18 @@ export interface Stats {
 }
 export interface Result {
     letters?: string[];
-    colors?: ("bg-emerald-500" | "bg-[#4456e1]" | "bg-[#0d0d0d]")[];
+    colors?: ("bg-emerald-500" | "bg-blue-500" | "bg-neutral-950")[];
     rows?: number;
 }
 export interface Match {
     fullMatch: string[];
     halfMatch: string[];
+    allFullMatch: string[];
+    allHalfMatch: string[];
 }
 
 function App() {
-    const [words, setWords] = useState<string>("tiger");
+    const [words, setWords] = useState<string>("happy");
     const [letters, setLetters] = useState<string[]>([]);
     const [result, setResult] = useState<Result[]>([]);
     const [rowCount, setRowCount] = useState<number>(0);
@@ -100,7 +102,9 @@ function App() {
         );
         const letters = [...usedLetters];
         setAllLetters([...letters.join("")]);
+    }, [result]);
 
+    useEffect(() => {
         const winCheck = winwinCheck(result, rowCount, words);
         if (winCheck) {
             const { matchingLetters, fullMatch } = winCheck;
@@ -126,7 +130,7 @@ function App() {
                 }, 2000);
             }
         }
-    }, [result]);
+    }, [rowCount]);
 
     const onUserInput = (letter: string) => {
         const userInput = handleInput(letter, letters, result, rowCount);

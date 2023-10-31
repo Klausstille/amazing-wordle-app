@@ -72,7 +72,7 @@ p {
 
 button {
     border-radius: 8px;
-    padding: 0.6em 1em;
+    /* padding: 0.6em 1em; */
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
@@ -164,15 +164,14 @@ select {
     border: none;
     outline: none;
 }
-.icon {
-    height: 30px;
-    cursor: pointer;
+.delete {
+    height: 40px;
 }
-.stats {
-    height: 31px;
-    padding: 1px;
-    margin-top: -0.5px;
+.footer button {
+    padding: 0;
+    margin: 0;
 }
+
 @media screen and (max-width: 768px) {
     button {
         border-radius: 8px;
