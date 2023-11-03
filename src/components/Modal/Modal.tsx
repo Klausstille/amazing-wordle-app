@@ -51,7 +51,7 @@ export default function Modal({
                     className="fixed top-0 left-0 w-screen h-screen"
                     onClick={() => setShowModal(false)}
                 ></aside>
-                <div className="modal relative rounded-3xl w-[300px] h-[300px] flex items-center flex-col bg-[#000000] lg:justify-center pt-6 lg:pt-0 gap-5 px-6 text-center z-40">
+                <div className="modal relative rounded-3xl w-[300px] h-[300px] flex items-center flex-col bg-[#000000] pt-8 gap-5 px-6 text-center z-40">
                     {" "}
                     <h3 className="text-5xl">💡</h3>
                     <h3
