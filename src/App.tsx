@@ -12,12 +12,14 @@ import Instruction from "./components/Instruction/Instruction.js";
 import StatsWrapper from "./components/StatsWrapper/StatsWrapper.js";
 import NavWrapper from "./components/Nav/NavWrapper.js";
 import Nav from "./components/Nav/Nav.js";
+import Modal from "./components/Modal/Modal.js";
 import { CSSTransition } from "react-transition-group";
 import { fetchNewWords } from "./components/helpers/fetchWords.js";
 import { useEffect, useState } from "react";
 import { handleCheck } from "./components/helpers/handleCheck.js";
 import { deleteInput } from "./components/helpers/deleteInput.js";
 import { handleInput } from "./components/helpers/handleInput.js";
+import { handleHint } from "./components/helpers/handleHint.js";
 import { winwinCheck } from "./components/helpers/winwinCheck.js";
 import { resetGame } from "./components/helpers/resetGame.js";
 import useLocalStorageState from "use-local-storage-state";
@@ -39,6 +41,14 @@ export interface Match {
     halfMatch: string[];
     allFullMatch: string[];
     allHalfMatch: string[];
+}
+export interface Translation {
+    source: string;
+    target?: string;
+}
+export interface Hint {
+    header: string;
+    translations?: Translation[];
 }
 
 function App() {
@@ -63,6 +73,8 @@ function App() {
     const [showInfo, setShowInfo] = useState<boolean>(
         width < 1024 ? false : true
     );
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [hintText, setHintText] = useState<Hint>();
 
     const handleSubmitNameAndLang = (evt: SubmitEvent) => {
         evt.preventDefault();
@@ -189,6 +201,24 @@ function App() {
         }
     };
 
+    const onHandleHint = async (alert: boolean) => {
+        if (alert) {
+            if (
+                confirm(
+                    "🔥🔥 IT'S A FIVE LETTER WORD! 🔥🔥 Still need more help?"
+                )
+            ) {
+                const { wordHint } = await handleHint(words, lang);
+                setHintText(wordHint);
+                !showModal && setShowModal(true);
+            }
+        } else {
+            const { wordHint } = await handleHint(words, lang);
+            setHintText(wordHint);
+            !showModal && setShowModal(true);
+        }
+    };
+
     return (
         <>
             <CSSTransition
@@ -214,6 +244,14 @@ function App() {
 
             {player && (
                 <>
+                    {showModal && (
+                        <Modal
+                            hint={hintText as Hint}
+                            word={words}
+                            setShowModal={setShowModal}
+                            onHandleHint={onHandleHint}
+                        />
+                    )}
                     <NavWrapper>
                         <Nav
                             setShowInfo={setShowInfo}
@@ -223,6 +261,7 @@ function App() {
                             width={width}
                             lang={lang}
                             setLang={setLang}
+                            onHandleHint={onHandleHint}
                         />
                     </NavWrapper>
                     <Main>

@@ -6,6 +6,7 @@ type NavProps = {
     showStats: boolean;
     width: number;
     lang: string;
+    onHandleHint: (showModal: boolean) => void;
 };
 
 export default function Nav({
@@ -16,11 +17,12 @@ export default function Nav({
     width,
     lang,
     setLang,
+    onHandleHint,
 }: NavProps) {
     return (
         <>
             <h3 className="font-bold">MyWordle</h3>
-            <ul className="flex justify-end gap-1">
+            <ul className="flex justify-end gap-4 cursor-pointer">
                 <li
                     className="lg:invisible visible"
                     onClick={() => {
@@ -28,10 +30,7 @@ export default function Nav({
                         width < 1024 && showStats && setShowStats(!showStats);
                     }}
                 >
-                    <button className="w-[80px] bg-[#0d0d0d] h-6 py-0 rounded-full text-sm">
-                        <h3>FAQ</h3>
-                    </button>
-                    {/* <img src="./info.svg" alt="info" className="icon" /> */}
+                    <h3>❔</h3>
                 </li>
                 <li
                     onClick={() => {
@@ -39,10 +38,10 @@ export default function Nav({
                         width < 1024 && showInfo && setShowInfo(!showInfo);
                     }}
                 >
-                    <button className="w-[80px] bg-[#0d0d0d] h-6 py-0 rounded-full text-sm">
-                        <h3>STATS</h3>
-                    </button>
-                    {/* <img src="./stats.svg" alt="stats" className="stats" /> */}
+                    <h3>🔥</h3>
+                </li>
+                <li onClick={() => onHandleHint(true)}>
+                    <h3>💡</h3>
                 </li>
                 <li className="flex gap-1 text-sm">
                     <button
@@ -53,9 +52,9 @@ export default function Nav({
                         }}
                         className={`${
                             lang === "en" && "bg-blue-500"
-                        } w-[50px] bg-[#0d0d0d] h-6 rounded-full py-0`}
+                        } w-[60px] bg-[#0d0d0d] h-6 rounded-full py-0`}
                     >
-                        <h3>EN</h3>
+                        <h3>EN 🇬🇧</h3>
                     </button>
                     <button
                         onClick={() => {
@@ -65,9 +64,9 @@ export default function Nav({
                         }}
                         className={`${
                             lang === "de" && "bg-blue-500"
-                        } w-[50px] bg-[#0d0d0d] h-6 py-0 rounded-full`}
+                        } w-[60px] bg-[#0d0d0d] h-6 py-0 rounded-full`}
                     >
-                        <h3>DE</h3>
+                        <h3>DE 🇩🇪</h3>
                     </button>
                 </li>
             </ul>
