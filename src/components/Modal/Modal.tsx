@@ -60,7 +60,7 @@ export default function Modal({
                             __html: modifiedHint,
                         }}
                     />
-                    {phrasesLength && phrasesLength > 2 && (
+                    {phrasesLength && phrasesLength >= 2 && (
                         <button
                             onClick={() => onHandleHint(false)}
                             className="bg-black-500 rounded-full px-3 py-3 text-sm"
