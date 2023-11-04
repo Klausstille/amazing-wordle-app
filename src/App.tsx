@@ -205,7 +205,9 @@ function App() {
         if (alert) {
             if (
                 confirm(
-                    "🔥🔥 IT'S A FIVE LETTER WORD! 🔥🔥 Still need more help?"
+                    lang == "en"
+                        ? "It's a 5-letter-word! 😉 Still need more help?"
+                        : "Es ist ein 5-Buchstaben-Wort! 😉 Noch mehr Tipps?"
                 )
             ) {
                 const { wordHint } = await handleHint(words, lang);

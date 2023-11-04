@@ -10,19 +10,15 @@ export const handleHint = async (words: string, lang: string) => {
                 );
                 if (results.length > 0) {
                     const result = results[0].hits[0].roms[0].arabs;
-                    const phrases = result.find(
+                    return result.find(
                         (entry: {
                             header: string;
                             translations?: { length: number }[];
                         }) => entry.header.includes("Phrases") || entry.header
                     );
-
-                    return phrases;
                 } else {
                     return false;
                 }
-            } else {
-                return false;
             }
         } catch (error) {
             console.log("error", error);

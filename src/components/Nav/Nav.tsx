@@ -46,9 +46,11 @@ export default function Nav({
                 <li className="flex gap-1 text-sm">
                     <button
                         onClick={() => {
-                            confirm(
-                                "Your current game will be lost. Are you sure?"
-                            ) && setLang("en");
+                            lang === "de" &&
+                                confirm(
+                                    "Dein aktuelles Spiel wird abgebrochen. Fortfahren?"
+                                ) &&
+                                setLang("en");
                         }}
                         className={`${
                             lang === "en" && "bg-blue-500"
@@ -58,9 +60,11 @@ export default function Nav({
                     </button>
                     <button
                         onClick={() => {
-                            confirm(
-                                "Your current game will be lost. Are you sure?"
-                            ) && setLang("de");
+                            lang === "en" &&
+                                confirm(
+                                    "Your current game will be lost. Are you sure?"
+                                ) &&
+                                setLang("de");
                         }}
                         className={`${
                             lang === "de" && "bg-blue-500"

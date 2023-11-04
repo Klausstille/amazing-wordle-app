@@ -31,9 +31,9 @@ export default function Modal({
     }
 
     const modifiedHint = replaceWordInHTML(
-        phrase?.toLowerCase() || "",
-        word.toLowerCase(),
-        "XXXXX"
+        phrase?.toUpperCase() || "",
+        word.toUpperCase(),
+        "*****"
     );
 
     return (
@@ -51,7 +51,7 @@ export default function Modal({
                     className="fixed top-0 left-0 w-screen h-screen"
                     onClick={() => setShowModal(false)}
                 ></aside>
-                <div className="modal relative rounded-3xl w-[300px] h-[300px] flex items-center flex-col bg-[#000000] pt-8 gap-5 px-6 text-center z-40">
+                <div className="modal relative rounded-3xl w-[300px] h-[300px] flex items-center flex-col bg-[rgb(32_32_32)] justify-center gap-8 px-6 text-center z-40 shadow-lg shadow-[rgb(32_32_32)]">
                     {" "}
                     <h3 className="text-5xl">💡</h3>
                     <h3
@@ -60,19 +60,19 @@ export default function Modal({
                             __html: modifiedHint,
                         }}
                     />
-                    {phrasesLength && phrasesLength > 1 && (
+                    {phrasesLength && phrasesLength > 2 && (
                         <button
                             onClick={() => onHandleHint(false)}
-                            className="bg-black-500 rounded-full px-5 py-1 text-sm"
+                            className="bg-black-500 rounded-full px-3 py-3 text-sm"
                         >
-                            <h3>Still want more...</h3>
+                            <h3 className="text-5xl">🃏</h3>
                         </button>
                     )}
                     <button
-                        className="absolute bottom-6 w-[80%] h-10 rounded-full text-l"
+                        className="absolute top-4 right-4 w-[40px] h-[40px] rounded-full text-l"
                         onClick={() => setShowModal(false)}
                     >
-                        CLOSE
+                        ❌
                     </button>
                 </div>
             </section>

@@ -12,7 +12,7 @@ export default function StatsWrapper({
     return (
         <section
             onClick={() => handleShowStats()}
-            className="stats-active w-screen h-screen fixed flex flex-col py-14 items-center text-[#bcbcbc] bg-[#0c0c0c] opacity-90 z-20 gap-5 font-clash"
+            className="stats-active w-screen h-screen fixed flex flex-col py-14 items-center text-[#bcbcbc] bg-[rgb(32_32_32)] opacity-90 z-20 gap-5 font-clash"
         >
             {children}
         </section>
