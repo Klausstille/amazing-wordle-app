@@ -297,11 +297,11 @@ function App() {
                             />
                         </Footer>
                     </Main>
-                    <Header>
+                    {/* <Header>
                         <h1 className="self-center font-avenir text-[35vw] pt-20">
                             Wordle
                         </h1>
-                    </Header>
+                    </Header> */}
                 </>
             )}
         </>
