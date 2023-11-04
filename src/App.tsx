@@ -1,7 +1,7 @@
 import Intro from "./components/Intro/Intro.js";
 import Input from "./components/Input/Input.js";
 import Footer from "./components/Footer/Footer.js";
-import Header from "./components/Header/Header.js";
+// import Header from "./components/Header/Header.js";
 import Main from "./components/Main/Main.js";
 import Tiles from "./components/Tiles/Tiles.js";
 import Board from "./components/Board/Board.js";
