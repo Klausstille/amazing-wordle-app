@@ -264,6 +264,7 @@ function App() {
                             lang={lang}
                             setLang={setLang}
                             onHandleHint={onHandleHint}
+                            result={result}
                         />
                     </NavWrapper>
                     <Main>

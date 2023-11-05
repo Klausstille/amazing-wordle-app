@@ -1,3 +1,4 @@
+import { Result } from "../../App";
 type NavProps = {
     setShowStats: (showStats: boolean) => void;
     setShowInfo: (showInfo: boolean) => void;
@@ -7,6 +8,7 @@ type NavProps = {
     width: number;
     lang: string;
     onHandleHint: (showModal: boolean) => void;
+    result: Result[];
 };
 
 export default function Nav({
@@ -18,6 +20,7 @@ export default function Nav({
     lang,
     setLang,
     onHandleHint,
+    result,
 }: NavProps) {
     return (
         <>
@@ -40,9 +43,11 @@ export default function Nav({
                 >
                     <h3>🔥</h3>
                 </li>
-                <li onClick={() => onHandleHint(true)}>
-                    <h3>💡</h3>
-                </li>
+                {result.length >= 2 && (
+                    <li onClick={() => onHandleHint(true)}>
+                        <h3>💡</h3>
+                    </li>
+                )}
                 <li className="flex gap-1 text-sm">
                     <button
                         onClick={() => {
