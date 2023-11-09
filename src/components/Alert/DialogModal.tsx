@@ -10,7 +10,7 @@ import * as React from "react";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
-        children: React.ReactElement<any, any>;
+        children: React.ReactElement;
     },
     ref: React.Ref<unknown>
 ) {
@@ -73,13 +73,17 @@ export default function DialogModal({
             <DialogActions>
                 <Button
                     name="DISAGREE"
-                    onClick={(e) => handleClose(e.target.name)}
+                    onClick={(e) =>
+                        handleClose((e.target as HTMLButtonElement).name)
+                    }
                 >
                     {lang == "en" ? "No, thanks!" : "Nein danke!"}
                 </Button>
                 <Button
                     name="AGREE"
-                    onClick={(e) => handleClose(e.target.name)}
+                    onClick={(e) =>
+                        handleClose((e.target as HTMLButtonElement).name)
+                    }
                 >
                     {lang == "en" ? "Yes, please!" : "Ja, bitte!"}
                 </Button>

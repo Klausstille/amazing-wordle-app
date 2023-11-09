@@ -213,7 +213,7 @@ function App() {
         }
     };
 
-    const handleClose = async (value) => {
+    const handleClose = async (value: string) => {
         console.log(value);
         if (value === "AGREE") {
             if (switchLang) {
@@ -265,7 +265,6 @@ function App() {
 
             {player && (
                 <>
-                    {/* {showModal && ( */}
                     <ModalComponent
                         hint={hintText as Hint}
                         word={words}
@@ -273,7 +272,6 @@ function App() {
                         onHandleHint={onHandleHint}
                         showModal={showModal}
                     />
-                    {/* )} */}
                     <NavWrapper>
                         <Nav
                             setSwitchLang={setSwitchLang}
