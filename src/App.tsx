@@ -214,7 +214,6 @@ function App() {
     };
 
     const handleClose = async (value: string) => {
-        console.log(value);
         if (value === "AGREE") {
             if (switchLang) {
                 setLang(lang === "en" ? "de" : "en");
@@ -262,7 +261,6 @@ function App() {
                     <Stats stats={stats} player={player} lang={lang} />
                 </StatsWrapper>
             </CSSTransition>
-
             {player && (
                 <>
                     <ModalComponent
