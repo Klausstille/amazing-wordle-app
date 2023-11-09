@@ -32,7 +32,7 @@ export default function Tiles({ result, isIncorrectWord }: TilesProps) {
     const tiles = new Array(5).fill(null);
 
     return (
-        <section className=" w-full grid grid-cols-5 gap-2 font-inter">
+        <section className=" w-full grid grid-cols-5 md:gap-2 gap-1 font-inter">
             {/* <section className="lg:w-[32vw] md:w-[70vw] w-[80vw] grid grid-cols-5 gap-1 font-inter"> */}
             {tiles.map((_, index) => {
                 return (
