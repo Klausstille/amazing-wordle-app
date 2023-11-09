@@ -6,6 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
 
 const Transition = React.forwardRef(function Transition(
@@ -15,6 +16,12 @@ const Transition = React.forwardRef(function Transition(
     ref: React.Ref<unknown>
 ) {
     return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const custom = createTheme({
+    palette: {
+        mode: "dark",
+    },
 });
 
 interface DialogModalProps {
@@ -56,38 +63,44 @@ export default function DialogModal({
     const langBodyTextHint = lang == "en" ? textLang.body.en : textLang.body.de;
 
     return (
-        <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            aria-describedby="alert-dialog-slide-description"
-        >
-            <DialogTitle>
-                {switchLang ? langTextHint : titleTextHint}
-            </DialogTitle>
-            <DialogContent>
-                <DialogContentText id="alert-dialog-slide-description">
-                    {switchLang ? langBodyTextHint : bodyTextHint}
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button
-                    name="DISAGREE"
-                    onClick={(e) =>
-                        handleClose((e.target as HTMLButtonElement).name)
-                    }
-                >
-                    {lang == "en" ? "No, thanks!" : "Nein danke!"}
-                </Button>
-                <Button
-                    name="AGREE"
-                    onClick={(e) =>
-                        handleClose((e.target as HTMLButtonElement).name)
-                    }
-                >
-                    {lang == "en" ? "Yes, please!" : "Ja, bitte!"}
-                </Button>
-            </DialogActions>
-        </Dialog>
+        <ThemeProvider theme={custom}>
+            <Dialog
+                open={open}
+                TransitionComponent={Transition}
+                keepMounted
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogTitle>
+                    <h3 className="text-center">
+                        {switchLang ? langTextHint : titleTextHint}
+                    </h3>
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-slide-description">
+                        <h3 className="text-center">
+                            {switchLang ? langBodyTextHint : bodyTextHint}
+                        </h3>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        name="DISAGREE"
+                        onClick={(e) =>
+                            handleClose((e.target as HTMLButtonElement).name)
+                        }
+                    >
+                        {lang == "en" ? "No, thanks!" : "Nein danke!"}
+                    </Button>
+                    <Button
+                        name="AGREE"
+                        onClick={(e) =>
+                            handleClose((e.target as HTMLButtonElement).name)
+                        }
+                    >
+                        {lang == "en" ? "Yes, please!" : "Ja, bitte!"}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </ThemeProvider>
     );
 }
