@@ -55,7 +55,7 @@ export default function ModalComponent({
         width: 400,
         bgcolor: "background.paper",
         boxShadow: 24,
-        p: 4,
+        p: 2,
         textAlign: "center",
     };
 
@@ -80,7 +80,7 @@ export default function ModalComponent({
                             {phrasesLength && phrasesLength >= 2 && (
                                 <button
                                     onClick={() => onHandleHint(false)}
-                                    className="bg-white rounded-full px-3 py-5 text-sm"
+                                    className="bg-transparent rounded-full px-3 py-5 text-sm"
                                 >
                                     <h3 className="text-5xl">🃏</h3>
                                 </button>
