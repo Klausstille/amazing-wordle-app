@@ -1,0 +1,89 @@
+import { Hint } from "../../App";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+interface ModalProps {
+    hint: Hint;
+    word: string;
+    setShowModal: (showModal: boolean) => void;
+    onHandleHint: (showModal: boolean) => void;
+    showModal: boolean;
+}
+
+export default function ModalComponent({
+    hint,
+    word,
+    setShowModal,
+    onHandleHint,
+    showModal,
+}: ModalProps) {
+    const filteredPhrases = hint?.translations?.filter(
+        (entry) => entry.source.length > 39
+    );
+    const phrasesLength = filteredPhrases?.length;
+    const randomIndex = Math.floor(Math.random() * (phrasesLength || 0));
+    const phrase =
+        filteredPhrases?.[randomIndex]?.source || "no hint available, sorry";
+
+    function replaceWordInHTML(
+        htmlContent: string,
+        targetWord: string,
+        replacement: string
+    ) {
+        const regex = new RegExp(targetWord, "g");
+        return htmlContent.replace(regex, replacement);
+    }
+
+    const modifiedHint = replaceWordInHTML(
+        phrase?.toUpperCase() || "",
+        word.toUpperCase(),
+        "*****"
+    );
+
+    const style: React.CSSProperties = {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: 400,
+        border: "2px solid #000",
+        boxShadow: "24px",
+        color: "black",
+        padding: 4,
+        textAlign: "center",
+        backgroundColor: "white",
+    };
+
+    return (
+        <div>
+            <Modal
+                open={showModal}
+                onClose={() => setShowModal(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        <h3 className="text-5xl py-6">💡</h3>
+                        <h3
+                            className="text-sm"
+                            dangerouslySetInnerHTML={{
+                                __html: modifiedHint,
+                            }}
+                        />
+                        {phrasesLength && phrasesLength >= 2 && (
+                            <button
+                                onClick={() => onHandleHint(false)}
+                                className="bg-white rounded-full px-3 py-5 text-sm"
+                            >
+                                <h3 className="text-5xl">🃏</h3>
+                            </button>
+                        )}
+                    </Typography>
+                </Box>
+            </Modal>
+        </div>
+    );
+}
