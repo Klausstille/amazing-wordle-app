@@ -11,7 +11,7 @@ import Instruction from "./components/Instruction/Instruction.js";
 import StatsWrapper from "./components/StatsWrapper/StatsWrapper.js";
 import NavWrapper from "./components/Nav/NavWrapper.js";
 import Nav from "./components/Nav/Nav.js";
-import Modal from "./components/Modal/Modal.js";
+import ModalComponent from "./components/Modal/ModalComponent.js";
 import DialogModal from "./components/Alert/DialogModal.js";
 import { CSSTransition } from "react-transition-group";
 import { fetchNewWords } from "./components/helpers/fetchWords.js";
@@ -265,14 +265,15 @@ function App() {
 
             {player && (
                 <>
-                    {showModal && (
-                        <Modal
-                            hint={hintText as Hint}
-                            word={words}
-                            setShowModal={setShowModal}
-                            onHandleHint={onHandleHint}
-                        />
-                    )}
+                    {/* {showModal && ( */}
+                    <ModalComponent
+                        hint={hintText as Hint}
+                        word={words}
+                        setShowModal={setShowModal}
+                        onHandleHint={onHandleHint}
+                        showModal={showModal}
+                    />
+                    {/* )} */}
                     <NavWrapper>
                         <Nav
                             setSwitchLang={setSwitchLang}
