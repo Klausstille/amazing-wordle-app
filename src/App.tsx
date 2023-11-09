@@ -1,7 +1,6 @@
 import Intro from "./components/Intro/Intro.js";
 import Input from "./components/Input/Input.js";
 import Footer from "./components/Footer/Footer.js";
-// import Header from "./components/Header/Header.js";
 import Main from "./components/Main/Main.js";
 import Tiles from "./components/Tiles/Tiles.js";
 import Board from "./components/Board/Board.js";
@@ -13,6 +12,7 @@ import StatsWrapper from "./components/StatsWrapper/StatsWrapper.js";
 import NavWrapper from "./components/Nav/NavWrapper.js";
 import Nav from "./components/Nav/Nav.js";
 import Modal from "./components/Modal/Modal.js";
+import DialogModal from "./components/Alert/DialogModal.js";
 import { CSSTransition } from "react-transition-group";
 import { fetchNewWords } from "./components/helpers/fetchWords.js";
 import { useEffect, useState } from "react";
@@ -75,6 +75,8 @@ function App() {
     );
     const [showModal, setShowModal] = useState<boolean>(false);
     const [hintText, setHintText] = useState<Hint>();
+    const [open, setOpen] = useState<boolean>(false);
+    const [switchLang, setSwitchLang] = useState<boolean>(false);
 
     const handleSubmitNameAndLang = (evt: SubmitEvent) => {
         evt.preventDefault();
@@ -203,17 +205,7 @@ function App() {
 
     const onHandleHint = async (alert: boolean) => {
         if (alert) {
-            if (
-                confirm(
-                    lang == "en"
-                        ? "It's a 5-letter-word! 😉 Still need more help?"
-                        : "Es ist ein 5-Buchstaben-Wort! 😉 Noch mehr Tipps?"
-                )
-            ) {
-                const { wordHint } = await handleHint(words, lang);
-                setHintText(wordHint);
-                !showModal && setShowModal(true);
-            }
+            setOpen(true);
         } else {
             const { wordHint } = await handleHint(words, lang);
             setHintText(wordHint);
@@ -221,8 +213,35 @@ function App() {
         }
     };
 
+    const handleClose = async (value) => {
+        console.log(value);
+        if (value === "AGREE") {
+            if (switchLang) {
+                setLang(lang === "en" ? "de" : "en");
+            } else {
+                const { wordHint } = await handleHint(words, lang);
+                setHintText(wordHint);
+                !showModal && setShowModal(true);
+            }
+            setSwitchLang(false);
+            setOpen(false);
+        } else {
+            setSwitchLang(false);
+            setOpen(false);
+            return;
+        }
+    };
+
     return (
         <>
+            {open && (
+                <DialogModal
+                    switchLang={switchLang}
+                    open={open}
+                    lang={lang}
+                    handleClose={handleClose}
+                />
+            )}
             <CSSTransition
                 in={player ? false : true}
                 classNames="stats"
@@ -256,13 +275,14 @@ function App() {
                     )}
                     <NavWrapper>
                         <Nav
+                            setSwitchLang={setSwitchLang}
+                            setOpen={setOpen}
                             setShowInfo={setShowInfo}
                             setShowStats={setShowStats}
                             showStats={showStats}
                             showInfo={showInfo}
                             width={width}
                             lang={lang}
-                            setLang={setLang}
                             onHandleHint={onHandleHint}
                             result={result}
                         />

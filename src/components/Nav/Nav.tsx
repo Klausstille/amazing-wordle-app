@@ -1,26 +1,28 @@
 import { Result } from "../../App";
 type NavProps = {
+    onHandleHint: (showModal: boolean) => void;
+    setSwitchLang: (switchLang: boolean) => void;
     setShowStats: (showStats: boolean) => void;
     setShowInfo: (showInfo: boolean) => void;
-    setLang: (lang: string) => void;
+    setOpen: (open: boolean) => void;
     showInfo: boolean;
     showStats: boolean;
     width: number;
     lang: string;
-    onHandleHint: (showModal: boolean) => void;
     result: Result[];
 };
 
 export default function Nav({
+    setOpen,
     setShowStats,
     setShowInfo,
     showInfo,
     showStats,
     width,
     lang,
-    setLang,
     onHandleHint,
     result,
+    setSwitchLang,
 }: NavProps) {
     return (
         <>
@@ -51,11 +53,8 @@ export default function Nav({
                 <li className="flex gap-1 text-sm">
                     <button
                         onClick={() => {
-                            lang === "de" &&
-                                confirm(
-                                    "Dein aktuelles Spiel wird abgebrochen. Fortfahren?"
-                                ) &&
-                                setLang("en");
+                            lang === "de" && setOpen(true);
+                            lang === "de" && setSwitchLang(true);
                         }}
                         className={`${
                             lang === "en" && "bg-blue-500"
@@ -65,11 +64,8 @@ export default function Nav({
                     </button>
                     <button
                         onClick={() => {
-                            lang === "en" &&
-                                confirm(
-                                    "Your current game will be lost. Are you sure?"
-                                ) &&
-                                setLang("de");
+                            lang === "en" && setOpen(true);
+                            lang === "en" && setSwitchLang(true);
                         }}
                         className={`${
                             lang === "de" && "bg-blue-500"
