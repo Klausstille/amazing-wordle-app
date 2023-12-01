@@ -193,6 +193,21 @@ select {
 .MuiDialogActions-root {
     justify-content: space-between !important;
 }
+.MuiPaper-root {
+    background-image: none !important;
+    background-color: #121212 !important;
+}
+.MuiPaper-root button {
+    background-color: transparent !important;
+    color: white !important;
+}
+.bg-emerald-500 {
+    background-color: white;
+    color: black !important;
+}
+.bg-blue-500 {
+    background-color: grey !important;
+}
 
 @media screen and (max-width: 768px) {
     button {

@@ -84,6 +84,7 @@ export default function DialogModal({
                 </DialogContent>
                 <DialogActions>
                     <Button
+                        className="text-white"
                         name="DISAGREE"
                         onClick={(e) =>
                             handleClose((e.target as HTMLButtonElement).name)
@@ -92,6 +93,7 @@ export default function DialogModal({
                         {lang == "en" ? "No, thanks!" : "Nein danke!"}
                     </Button>
                     <Button
+                        className="text-white"
                         name="AGREE"
                         onClick={(e) =>
                             handleClose((e.target as HTMLButtonElement).name)

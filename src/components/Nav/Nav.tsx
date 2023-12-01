@@ -27,7 +27,7 @@ export default function Nav({
     return (
         <>
             <h3 className="font-bold">MyWordle</h3>
-            <ul className="flex justify-end gap-4 cursor-pointer">
+            <ul className="flex justify-end gap-4 cursor-pointer grayscale">
                 <li
                     className="lg:invisible visible"
                     onClick={() => {
@@ -50,7 +50,7 @@ export default function Nav({
                         <h3>💡</h3>
                     </li>
                 )}
-                <li className="flex gap-1 text-sm">
+                <li className="flex gap-2 text-sm">
                     <button
                         onClick={() => {
                             lang === "de" && setOpen(true);
@@ -58,9 +58,9 @@ export default function Nav({
                         }}
                         className={`${
                             lang === "en" && "bg-blue-500"
-                        } w-[60px] bg-[#0d0d0d] h-6 rounded-full py-0`}
+                        } w-[50px] bg-[#0d0d0d] h-6 rounded-full py-0`}
                     >
-                        <h3>EN 🇬🇧</h3>
+                        <h3>EN</h3>
                     </button>
                     <button
                         onClick={() => {
@@ -69,9 +69,9 @@ export default function Nav({
                         }}
                         className={`${
                             lang === "de" && "bg-blue-500"
-                        } w-[60px] bg-[#0d0d0d] h-6 py-0 rounded-full`}
+                        } w-[50px] bg-[#0d0d0d] h-6 py-0 rounded-full`}
                     >
-                        <h3>DE 🇩🇪</h3>
+                        <h3>DE</h3>
                     </button>
                 </li>
             </ul>

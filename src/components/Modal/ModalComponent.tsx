@@ -68,11 +68,16 @@ export default function ModalComponent({
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <Box sx={style}>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            <h3 className="text-5xl py-6">💡</h3>
+                    <Box sx={style} className="relative">
+                        <Typography
+                            id="modal-modal-description"
+                            sx={{ mt: 2, mb: 2 }}
+                        >
+                            <h3 className="text-xl absolute top-2 left-2">
+                                💡
+                            </h3>
                             <h3
-                                className="text-sm"
+                                className="text-xl"
                                 dangerouslySetInnerHTML={{
                                     __html: modifiedHint,
                                 }}
@@ -80,9 +85,9 @@ export default function ModalComponent({
                             {phrasesLength && phrasesLength >= 2 && (
                                 <button
                                     onClick={() => onHandleHint(false)}
-                                    className="bg-transparent rounded-full px-3 py-5 text-sm"
+                                    className="bg-[#80808037] rounded-3xl px-6 mt-4 py-1"
                                 >
-                                    <h3 className="text-5xl">🃏</h3>
+                                    <h3 className="text-sm">more</h3>
                                 </button>
                             )}
                         </Typography>
