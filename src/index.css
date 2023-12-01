@@ -202,7 +202,7 @@ select {
     color: white !important;
 }
 .bg-emerald-500 {
-    background-color: white;
+    background-color: white !important;
     color: black !important;
 }
 .bg-blue-500 {
