@@ -166,6 +166,9 @@ function App() {
     };
 
     const onHandleCheck = async () => {
+        if (result[rowCount]?.letters?.length !== 5) {
+            return;
+        }
         setIsLoading(true);
         const checkResult = await handleCheck(
             result,
@@ -174,8 +177,8 @@ function App() {
             letters,
             lang
         );
+        setIsLoading(false);
         if (checkResult) {
-            setIsLoading(false);
             const {
                 checkedResults,
                 checkedRowCount,

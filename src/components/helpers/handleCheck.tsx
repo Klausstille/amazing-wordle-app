@@ -7,9 +7,6 @@ export const handleCheck = async (
     letters: string[],
     lang: string
 ) => {
-    if (result[rowCount]?.letters?.length !== 5) {
-        return;
-    }
     const word: string | undefined = result[rowCount]?.letters
         ?.join("")
         .toLowerCase();
