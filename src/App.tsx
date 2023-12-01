@@ -24,6 +24,7 @@ import { winwinCheck } from "./components/helpers/winwinCheck.js";
 import { resetGame } from "./components/helpers/resetGame.js";
 import useLocalStorageState from "use-local-storage-state";
 import GetWindowDimensions from "./components/helpers/getWindowDimensions.js";
+import PuffLoader from "react-spinners/PuffLoader";
 
 export interface Stats {
     game: Result[];
@@ -77,7 +78,7 @@ function App() {
     const [hintText, setHintText] = useState<Hint>();
     const [open, setOpen] = useState<boolean>(false);
     const [switchLang, setSwitchLang] = useState<boolean>(false);
-
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const handleSubmitNameAndLang = (evt: SubmitEvent) => {
         evt.preventDefault();
         const form = evt.target as HTMLFormElement;
@@ -165,6 +166,7 @@ function App() {
     };
 
     const onHandleCheck = async () => {
+        setIsLoading(true);
         const checkResult = await handleCheck(
             result,
             rowCount,
@@ -173,6 +175,7 @@ function App() {
             lang
         );
         if (checkResult) {
+            setIsLoading(false);
             const {
                 checkedResults,
                 checkedRowCount,
@@ -207,9 +210,11 @@ function App() {
         if (alert) {
             setOpen(true);
         } else {
+            setIsLoading(true);
             const { wordHint } = await handleHint(words, lang);
             setHintText(wordHint);
             !showModal && setShowModal(true);
+            setIsLoading(false);
         }
     };
 
@@ -218,13 +223,17 @@ function App() {
             if (switchLang) {
                 setLang(lang === "en" ? "de" : "en");
             } else {
+                setIsLoading(true);
                 const { wordHint } = await handleHint(words, lang);
                 setHintText(wordHint);
                 !showModal && setShowModal(true);
+                setIsLoading(false);
             }
             setSwitchLang(false);
             setOpen(false);
+            setIsLoading(false);
         } else {
+            setIsLoading(false);
             setSwitchLang(false);
             setOpen(false);
             return;
@@ -233,6 +242,16 @@ function App() {
 
     return (
         <>
+            {isLoading && (
+                <div className="spinner">
+                    <PuffLoader
+                        color="#a3a3a3"
+                        cssOverride={{
+                            scale: "3",
+                        }}
+                    />
+                </div>
+            )}
             {open && (
                 <DialogModal
                     switchLang={switchLang}

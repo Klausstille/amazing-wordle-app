@@ -15,7 +15,8 @@
 
     /* color-scheme: light dark; */
     color: rgba(255, 255, 255, 0.87);
-    background-image: linear-gradient(145deg, rgb(27 27 27) 0%, #3b82f6 100%);
+    background-color: #202020;
+    /* background-image: linear-gradient(145deg, rgb(27 27 27) 0%, #3b82f6 100%); */
     /* background-image: linear-gradient(
         145deg,
         #3b82f6 0%,
@@ -78,14 +79,20 @@ h3 {
 p {
     font-size: 0.6em;
 }
-
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
 button {
-    border-radius: 8px;
+    border-radius: 10px;
     /* padding: 0.6em 1em; */
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #363636;
+    background-color: #101110;
     transition: background-color 0.25s;
     opacity: 0.8;
 }
@@ -149,12 +156,12 @@ button.buzz {
 }
 
 .stats-enter-active {
-    opacity: 1;
+    opacity: 0.9;
     transition: opacity 300ms;
 }
 
 .stats-exit {
-    opacity: 1;
+    opacity: 0.9;
 }
 
 .stats-exit-active {
