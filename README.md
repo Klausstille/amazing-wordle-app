@@ -1,27 +1,35 @@
-# React + TypeScript + Vite
+# Wordle App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Wordle app inspired by the popular New York Times Wordle game. It allows users to guess a hidden word within a set number of attempts. Additionally, it provides statistics about the user's gameplay.
 
-Currently, two official plugins are available:
+![Main Page](public/img/page-1.png)
+![Main Page](public/img/page-2.png)
+![Main Page](public/img/page-3.png)
+![Main Page](public/img/page-4.png)
+![Main Page](public/img/page-5.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+-   Guess Distribution/Statistics:
+    -   Total number of games played
+    -   Win percentage
+    -   Current streak
+    -   Maximum streak
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+-   **React (Vite)**: The frontend framework used to build the application.
+-   **Typescript**: For type-checking and ensuring code integrity.
+-   **TailwindCSS**: Used for styling the user interface with utility-first CSS classes.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## APIs Used
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+-   **Pons API**: Utilized for checking if a guessed word exists.
+-   **Random Words API**: Used to fetch new words for the game.
+
+## Supported Languages
+
+The Wordle app supports two languages:
+
+-   English (en)
+-   German (de)
