@@ -34,9 +34,9 @@ export const handleCheck = async (
     };
     const wordExists = await checkWordExists(word || "");
     const isIncorrectWord: boolean = wordExists ? false : true;
-    const correctPosColor = "bg-emerald-500";
-    const wrongPosColor = "bg-blue-500";
-    const wrongLetterColor = "bg-neutral-950";
+    const correctPosColor = "bg-emerald-500 text-white";
+    const wrongPosColor = "bg-blue-500 text-white";
+    const wrongLetterColor = "bg-white text-gray-800";
     const colors = result[rowCount]?.letters?.map((letter, index) => {
         if (letter == words.toUpperCase()[index]) {
             return correctPosColor;

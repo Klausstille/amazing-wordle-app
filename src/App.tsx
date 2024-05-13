@@ -34,7 +34,11 @@ export interface Stats {
 }
 export interface Result {
     letters?: string[];
-    colors?: ("bg-emerald-500" | "bg-blue-500" | "bg-neutral-950")[];
+    colors?: (
+        | "bg-emerald-500 text-white"
+        | "bg-blue-500 text-white"
+        | "bg-white text-gray-800"
+    )[];
     rows?: number;
 }
 export interface Match {
@@ -292,21 +296,21 @@ function App() {
                         onHandleHint={onHandleHint}
                         showModal={showModal}
                     />
-                    <NavWrapper>
-                        <Nav
-                            setSwitchLang={setSwitchLang}
-                            setOpen={setOpen}
-                            setShowInfo={setShowInfo}
-                            setShowStats={setShowStats}
-                            showStats={showStats}
-                            showInfo={showInfo}
-                            width={width}
-                            lang={lang}
-                            onHandleHint={onHandleHint}
-                            result={result}
-                        />
-                    </NavWrapper>
                     <Main>
+                        <NavWrapper>
+                            <Nav
+                                setSwitchLang={setSwitchLang}
+                                setOpen={setOpen}
+                                setShowInfo={setShowInfo}
+                                setShowStats={setShowStats}
+                                showStats={showStats}
+                                showInfo={showInfo}
+                                width={width}
+                                lang={lang}
+                                onHandleHint={onHandleHint}
+                                result={result}
+                            />
+                        </NavWrapper>
                         <CSSTransition
                             in={showInfo}
                             classNames="stats"

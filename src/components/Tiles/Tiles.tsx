@@ -37,7 +37,7 @@ export default function Tiles({ result, isIncorrectWord }: TilesProps) {
             {tiles.map((_, index) => {
                 return (
                     <button
-                        className={`tiles py-2 h-full text-white ${
+                        className={`tiles py-2 h-full text-gray-800 ${
                             // className={`tiles h-[15vw] sm:h-[14vw] lg:h-[6vw] py-2 text-white ${
                             result?.colors?.[index] &&
                             activeTiles[index] &&

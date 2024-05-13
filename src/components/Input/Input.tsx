@@ -57,10 +57,10 @@ export default function Input({
         "input grid items-center justify-center relative font-avenir sm:h-10 h-14";
 
     const colors = {
-        fullMatch: "hover:bg-emerald-500 bg-emerald-500",
-        halfMatch: "hover:bg-blue-500 bg-blue-500",
-        neutral: "hover:bg-neutral-950 bg-neutral-950",
-        default: "hover:bg-neutral-800 bg-neutral-800",
+        fullMatch: "hover:bg-emerald-500 bg-emerald-500 text-white",
+        halfMatch: "hover:bg-blue-500 bg-blue-500 text-white",
+        neutral: "hover:bg-white bg-white text-gray-800",
+        default: "hover:bg-[#ebebeb] bg-[#ebebeb] text-gray-800",
     };
 
     useEffect(() => {
@@ -93,7 +93,7 @@ export default function Input({
                         className={`${
                             (isHalfMatch && colors["halfMatch"]) ||
                             (isFullMatch && colors["fullMatch"]) ||
-                            (isNoMatch && colors["neutral"]) ||
+                            (isNoMatch && colors["neutral"] && "bg-gray-300") ||
                             colors["default"]
                         } ${buttonClasses}`}
                     >

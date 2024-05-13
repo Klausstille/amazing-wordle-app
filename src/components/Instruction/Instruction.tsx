@@ -79,8 +79,8 @@ export default function Instruction({ lang }: InstructionProps) {
                     (letter: string, idx: number) => (
                         <button
                             key={idx}
-                            className={`w-10 h-10 text-white text-center text-sm ${
-                                idx == 0 ? "bg-emerald-500" : ""
+                            className={`w-10 h-10 text-gray-800 bg-[#ebebeb] text-center text-sm ${
+                                idx == 0 ? "bg-emerald-500 text-white" : ""
                             }`}
                         >
                             {letter}
@@ -95,8 +95,8 @@ export default function Instruction({ lang }: InstructionProps) {
                 {translation.buttonsWrong.map((letter: string, idx: number) => (
                     <button
                         key={idx}
-                        className={`w-10 h-10 text-white text-center text-sm ${
-                            idx == 4 ? "bg-blue-500" : ""
+                        className={`w-10 h-10 text-gray-800 bg-[#ebebeb] text-center text-sm ${
+                            idx == 4 ? "bg-blue-500 text-white" : ""
                         }`}
                     >
                         {letter}
@@ -109,7 +109,7 @@ export default function Instruction({ lang }: InstructionProps) {
                     (letter: string, idx: number) => (
                         <button
                             key={idx}
-                            className="w-10 h-10 text-white text-center text-sm"
+                            className="w-10 h-10 text-gray-800 bg-[#ebebeb] text-center text-sm"
                         >
                             {letter}
                         </button>
@@ -122,7 +122,7 @@ export default function Instruction({ lang }: InstructionProps) {
                 <a
                     href="http://stillestudio.com"
                     target="blank"
-                    className="text-white hover:text-white"
+                    className="text-gray-800 hover:text-gray-900"
                 >
                     Klaus Stille
                 </a>{" "}

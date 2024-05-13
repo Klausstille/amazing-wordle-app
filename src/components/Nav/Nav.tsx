@@ -26,7 +26,7 @@ export default function Nav({
 }: NavProps) {
     return (
         <>
-            <h3 className="font-bold">MyWordle</h3>
+            <h3 className="font-bold text-gray-800">MyWordle</h3>
             <ul className="flex justify-end gap-4 cursor-pointer">
                 <li
                     className="lg:invisible visible"
@@ -35,7 +35,7 @@ export default function Nav({
                         width < 1024 && showStats && setShowStats(!showStats);
                     }}
                 >
-                    <h3>❔</h3>
+                    <h3 className="text-gray-800">Instructions</h3>
                 </li>
                 <li
                     onClick={() => {
@@ -57,8 +57,8 @@ export default function Nav({
                             lang === "de" && setSwitchLang(true);
                         }}
                         className={`${
-                            lang === "en" && "bg-blue-500"
-                        } w-[50px] bg-[#0d0d0d] h-6 rounded-full py-0`}
+                            lang === "en" && "bg-blue-500 text-white"
+                        } w-[50px] bg-[#ebebeb] text-gray-800 h-6 rounded-full py-0`}
                     >
                         <h3>EN</h3>
                     </button>
@@ -69,7 +69,7 @@ export default function Nav({
                         }}
                         className={`${
                             lang === "de" && "bg-blue-500"
-                        } w-[50px] bg-[#0d0d0d] h-6 py-0 rounded-full`}
+                        } w-[50px] bg-[#ebebeb] text-gray-800 h-6 py-0 rounded-full`}
                     >
                         <h3>DE</h3>
                     </button>

@@ -15,7 +15,7 @@
 
     /* color-scheme: light dark; */
     color: rgba(255, 255, 255, 0.87);
-    background-color: #202020;
+    background-color: #ffffff;
     /* background-image: linear-gradient(145deg, rgb(27 27 27) 0%, #3b82f6 100%); */
     /* background-image: linear-gradient(
         145deg,
@@ -87,14 +87,19 @@ p {
     z-index: 9999;
 }
 button {
-    border-radius: 10px;
+    border-radius: 20px;
     /* padding: 0.6em 1em; */
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #101110;
+    /* background-color: #101110; */
     transition: background-color 0.25s;
     opacity: 0.8;
+}
+
+button.tiles {
+    /* color: #1f2937; */
+    border: solid 1px #1f2937;
 }
 button:focus {
     outline: none;
@@ -211,7 +216,6 @@ select {
 
 @media screen and (max-width: 768px) {
     button {
-        border-radius: 8px;
         padding: 0.4em 0.4em;
         font-size: 1em;
     }
