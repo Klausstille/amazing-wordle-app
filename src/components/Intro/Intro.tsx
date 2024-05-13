@@ -18,6 +18,7 @@ export default function Intro({ handleSubmit }: IntroProps) {
                     <h2 className="font-bold">Hi there!</h2>
                     <h3 className="font-bold">What's your Name?</h3>
                     <input
+                        autoComplete="off"
                         maxLength={7}
                         type="text"
                         name="name"
