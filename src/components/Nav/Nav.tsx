@@ -45,8 +45,15 @@ export default function Nav({
                 >
                     <h3>🔥</h3>
                 </li>
-                {result.length >= 2 && (
-                    <li onClick={() => onHandleHint(true)}>
+                {result[0]?.colors && result[0]?.colors.length > 1 && (
+                    <li
+                        className={`${
+                            result[0]?.colors &&
+                            result[0]?.colors.length > 1 &&
+                            "animateHint"
+                        }`}
+                        onClick={() => onHandleHint(true)}
+                    >
                         <h3>🔮</h3>
                     </li>
                 )}

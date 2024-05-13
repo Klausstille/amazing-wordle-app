@@ -153,6 +153,24 @@ button.buzz {
     animation-timing-function: ease-in-out;
 }
 
+.animateHint {
+    animation-name: hint;
+    animation-duration: 1s;
+    animation-iteration-count: 3;
+    animation-timing-function: ease-in-out;
+}
+@keyframes hint {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 @keyframes loading {
     0% {
         transform: translateX(50%) translateY(-50%) rotate(0deg);
