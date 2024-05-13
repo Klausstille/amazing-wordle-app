@@ -27,7 +27,7 @@ export default function Nav({
     return (
         <>
             <h3 className="font-bold">MyWordle</h3>
-            <ul className="flex justify-end gap-4 cursor-pointer grayscale">
+            <ul className="flex justify-end gap-4 cursor-pointer">
                 <li
                     className="lg:invisible visible"
                     onClick={() => {

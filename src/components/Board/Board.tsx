@@ -6,7 +6,10 @@ type BoardProps = {
 
 export default function Board({ children }: BoardProps) {
     return (
-        <section className="flex h-full py-2 px-2 sm:pb-28 pb-[10rem] flex-col items-center md:gap-2 gap-1 ">
+        <section
+            className="h-[calc(100vh-80px)] px-2 sm:pb-28 pb-[10rem] grid md:gap-2 gap-1"
+            style={{ gridTemplateRows: "repeat(6, 1fr)" }}
+        >
             {children}
         </section>
     );

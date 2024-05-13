@@ -201,13 +201,13 @@ select {
     background-color: transparent !important;
     color: white !important;
 }
-.bg-emerald-500 {
+/* .bg-emerald-500 {
     background-color: white !important;
     color: black !important;
 }
 .bg-blue-500 {
     background-color: grey !important;
-}
+} */
 
 @media screen and (max-width: 768px) {
     button {
