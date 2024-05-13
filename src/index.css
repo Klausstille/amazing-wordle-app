@@ -188,7 +188,9 @@ select {
 }
 
 .delete {
-    height: 40px;
+    width: 40px;
+    height: 100%;
+    padding-top: 4px;
 }
 .footer button {
     padding: 0;
@@ -218,6 +220,15 @@ select {
     button {
         padding: 0.4em 0.4em;
         font-size: 1em;
+    }
+    .footer button {
+        padding: 0em;
+        height: 32px;
+    }
+    .delete {
+        width: 40px;
+        height: 100%;
+        padding-top: 3px;
     }
     h2 {
         font-size: 1.5em;
