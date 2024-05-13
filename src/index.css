@@ -8,6 +8,10 @@
         format("woff");
 }
 
+* {
+    box-sizing: border-box;
+}
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -79,15 +83,9 @@ h3 {
 p {
     font-size: 0.6em;
 }
-.spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-}
+
 button {
-    border-radius: 20px;
+    border-radius: 10px;
     /* padding: 0.6em 1em; */
     font-size: 1em;
     font-weight: 500;
@@ -99,7 +97,7 @@ button {
 
 button.tiles {
     /* color: #1f2937; */
-    border: solid 1px #1f2937;
+    /* border: solid 1px #1f2937; */
 }
 button:focus {
     outline: none;
@@ -145,6 +143,25 @@ button.buzz {
     }
     100% {
         transform: translateX(0);
+    }
+}
+
+.loading {
+    animation-name: loading;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(50%) translateY(-50%) rotate(0deg);
+    }
+    50% {
+        transform: translateX(50%) translateY(-50%) rotate(360deg);
+    }
+    100% {
+        transform: translateX(50%) translateY(-50%) rotate(720deg);
     }
 }
 

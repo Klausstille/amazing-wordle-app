@@ -93,12 +93,14 @@ export default function Input({
                         className={`${
                             (isHalfMatch && colors["halfMatch"]) ||
                             (isFullMatch && colors["fullMatch"]) ||
-                            (isNoMatch && colors["neutral"] && "bg-gray-300") ||
+                            (isNoMatch &&
+                                colors["neutral"] &&
+                                "bg-gray-300 hover:bg-gray-300") ||
                             colors["default"]
                         } ${buttonClasses}`}
                     >
                         <span>{letter}</span>
-                        <span className="text-[10px] absolute top-1 right-2">
+                        <span className="text-[10px] absolute top-2 max-sm:hidden max-lg:right-3 max-xl:right-2 right-3">
                             {isFullMatch
                                 ? words.toUpperCase().indexOf(letter) + 1
                                 : ""}

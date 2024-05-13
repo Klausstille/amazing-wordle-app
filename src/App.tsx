@@ -24,7 +24,7 @@ import { winwinCheck } from "./components/helpers/winwinCheck.js";
 import { resetGame } from "./components/helpers/resetGame.js";
 import useLocalStorageState from "use-local-storage-state";
 import GetWindowDimensions from "./components/helpers/getWindowDimensions.js";
-import PuffLoader from "react-spinners/PuffLoader";
+// import PuffLoader from "react-spinners/PuffLoader";
 
 export interface Stats {
     game: Result[];
@@ -249,22 +249,25 @@ function App() {
 
     return (
         <>
-            {isLoading && (
-                <div className="spinner">
-                    <PuffLoader
-                        color="#a3a3a3"
-                        cssOverride={{
-                            scale: "3",
-                        }}
-                    />
-                </div>
-            )}
+            {/* {isLoading && ( */}
+            <div
+                className={`fixed top-0 left-0 w-full h-full backdrop-blur-sm z-[9999] ${
+                    isLoading ? "opacity-100" : "opacity-0"
+                } transition-all duration-[0.5s] pointer-events-none`}
+            >
+                <h1 className="loading text-5xl max-sm:text-3xl fixed top-1/2 right-1/2 text-gray-800 font-bold">
+                    MyWordle
+                </h1>
+            </div>
+            {/* )} */}
             {open && (
                 <DialogModal
                     switchLang={switchLang}
+                    setSwitchLang={setSwitchLang}
                     open={open}
                     lang={lang}
                     handleClose={handleClose}
+                    setIsOpen={setOpen}
                 />
             )}
             <CSSTransition

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Div100vh from "react-div-100vh";
 
 type StatsWrapperProps = {
     children: ReactNode;
@@ -10,11 +11,11 @@ export default function StatsWrapper({
     handleShowStats,
 }: StatsWrapperProps) {
     return (
-        <section
+        <Div100vh
+            className="modal w-full fixed flex flex-col items-center justify-center backdrop-blur-xl z-50 text-gray-800 font-clash antialiased px-12"
             onClick={() => handleShowStats()}
-            className="stats-active w-screen h-screen fixed flex flex-col py-14 items-center text-gray-800 backdrop-blur-xl z-[999] gap-5 font-clash"
         >
             {children}
-        </section>
+        </Div100vh>
     );
 }

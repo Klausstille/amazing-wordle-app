@@ -43,8 +43,8 @@ export default function Instruction({ lang }: InstructionProps) {
                 "Die Farbe der Kacheln zeigt an, wie nah Dein Tipp am gesuchten Wort ist.",
             examples: "BEISPIELE",
             letterInCorrectSpot: "T ist im Wort und an der richtigen Stelle.",
-            letterInWrongSpot: "S ist im Wort, aber an der falschen Stelle.",
-            noLetterInWord: "Kein Buchstabe im Wort an irgendeiner Stelle.",
+            letterInWrongSpot: "S ist im Wort, aber an falscher Stelle.",
+            noLetterInWord: "Kein Buchstabe an irgendeiner Stelle.",
             buttonsCorrect: ["T", "I", "G", "E", "R"],
             buttonsWrong: ["F", "U", "C", "H", "S"],
             buttonsNoMatch: ["W", "O", "L", "K", "E"],
@@ -88,7 +88,7 @@ export default function Instruction({ lang }: InstructionProps) {
                     )
                 )}
             </aside>
-            <h3 className="font-black py-1">
+            <h3 className="font-black py-1 text-center ">
                 {translation.letterInCorrectSpot}
             </h3>
             <aside className="text-center flex gap-1 justify-center">
@@ -103,7 +103,9 @@ export default function Instruction({ lang }: InstructionProps) {
                     </button>
                 ))}
             </aside>
-            <h3 className="font-black py-1">{translation.letterInWrongSpot}</h3>
+            <h3 className="font-black py-1 text-center ">
+                {translation.letterInWrongSpot}
+            </h3>
             <aside className="text-center flex gap-1 justify-center">
                 {translation.buttonsNoMatch.map(
                     (letter: string, idx: number) => (
@@ -116,7 +118,9 @@ export default function Instruction({ lang }: InstructionProps) {
                     )
                 )}
             </aside>
-            <h3 className="font-black py-1">{translation.noLetterInWord}</h3>
+            <h3 className="font-black py-1 text-center ">
+                {translation.noLetterInWord}
+            </h3>
             <p className="font-bold pt-4 tracking-wide text-center">
                 Built with much ❤️ by{" "}
                 <a

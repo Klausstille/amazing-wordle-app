@@ -1,14 +1,5 @@
 import { Hint } from "../../App";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const custom = createTheme({
-    palette: {
-        mode: "dark",
-    },
-});
+import Div100vh from "react-div-100vh";
 interface ModalProps {
     hint: Hint;
     word: string;
@@ -47,53 +38,31 @@ export default function ModalComponent({
         "*****"
     );
 
-    const style = {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 250,
-        bgcolor: "background.paper",
-        boxShadow: 24,
-        p: 2,
-        textAlign: "center",
-    };
-
     return (
-        <div>
-            <ThemeProvider theme={custom}>
-                <Modal
-                    open={showModal}
-                    onClose={() => setShowModal(false)}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style} className="relative">
-                        <Typography
-                            id="modal-modal-description"
-                            sx={{ mt: 2, mb: 2 }}
-                        >
-                            <h3 className="text-xl absolute top-2 left-2">
-                                💡
-                            </h3>
-                            <h3
-                                className="text-xl"
-                                dangerouslySetInnerHTML={{
-                                    __html: modifiedHint,
-                                }}
-                            />
-                            {phrasesLength && phrasesLength >= 2 && (
-                                <button
-                                    onClick={() => onHandleHint(false)}
-                                    className="bg-[#80808037] rounded-3xl px-6 mt-4 py-1"
-                                >
-                                    <h3 className="text-sm">more</h3>
-                                </button>
-                            )}
-                        </Typography>
-                    </Box>
-                </Modal>
-            </ThemeProvider>
-        </div>
+        showModal && (
+            <Div100vh
+                className="modal w-full fixed flex flex-col items-center justify-center backdrop-blur-xl z-50 text-gray-800 font-clash antialiased px-12"
+                onClick={() => setShowModal(false)}
+            >
+                <h3 className="text-3xl absolute top-2 left-2">💡</h3>
+                <h3
+                    className="text-xl  text-center"
+                    dangerouslySetInnerHTML={{
+                        __html: modifiedHint,
+                    }}
+                />
+                {phrasesLength && phrasesLength >= 2 && (
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onHandleHint(false);
+                        }}
+                        className="bg-[#80808037] rounded-3xl px-6 mt-4 py-1"
+                    >
+                        <h3 className="text-sm">more</h3>
+                    </button>
+                )}
+            </Div100vh>
+        )
     );
 }

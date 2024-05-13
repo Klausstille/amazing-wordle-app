@@ -1,34 +1,12 @@
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import * as React from "react";
-
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-        children: React.ReactElement;
-    },
-    ref: React.Ref<unknown>
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const custom = createTheme({
-    palette: {
-        mode: "dark",
-    },
-});
+import Div100vh from "react-div-100vh";
 
 interface DialogModalProps {
     handleClose: (name: string) => void;
+    setIsOpen: (isOpen: boolean) => void;
     switchLang: boolean;
     open: boolean;
     lang: string;
+    setSwitchLang: (switchLang: boolean) => void;
 }
 
 export default function DialogModal({
@@ -36,6 +14,8 @@ export default function DialogModal({
     lang,
     handleClose,
     switchLang,
+    setIsOpen,
+    setSwitchLang,
 }: DialogModalProps) {
     const textHint = {
         title: {
@@ -63,46 +43,42 @@ export default function DialogModal({
     const langBodyTextHint = lang == "en" ? textLang.body.en : textLang.body.de;
 
     return (
-        <ThemeProvider theme={custom}>
-            <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                keepMounted
-                aria-describedby="alert-dialog-slide-description"
+        open && (
+            <Div100vh
+                className="modal w-full fixed flex flex-col items-center justify-center backdrop-blur-xl z-50 text-gray-800 font-clash antialiased px-12"
+                onClick={() => {
+                    setIsOpen(false);
+                    setSwitchLang(false);
+                }}
             >
-                <DialogTitle>
-                    <h3 className="text-center">
-                        {switchLang ? langTextHint : titleTextHint}
-                    </h3>
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
-                        <h3 className="text-center">
-                            {switchLang ? langBodyTextHint : bodyTextHint}
-                        </h3>
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        className="text-white"
+                <h3 className="text-center text-2xl pb-4">
+                    {switchLang ? langTextHint : titleTextHint}
+                </h3>
+
+                <h3 className="text-center pb-4">
+                    {switchLang ? langBodyTextHint : bodyTextHint}
+                </h3>
+                <div className="flex gap-2 justify-center">
+                    <button
+                        className={`bg-[#ebebeb] text-gray-800 px-4 py-1 rounded-full`}
                         name="DISAGREE"
                         onClick={(e) =>
                             handleClose((e.target as HTMLButtonElement).name)
                         }
                     >
                         {lang == "en" ? "No, thanks!" : "Nein danke!"}
-                    </Button>
-                    <Button
-                        className="text-white"
+                    </button>
+                    <button
+                        className={`bg-[#ebebeb] text-gray-800 px-4 py-1  rounded-full`}
                         name="AGREE"
                         onClick={(e) =>
                             handleClose((e.target as HTMLButtonElement).name)
                         }
                     >
                         {lang == "en" ? "Yes, please!" : "Ja, bitte!"}
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </ThemeProvider>
+                    </button>
+                </div>
+            </Div100vh>
+        )
     );
 }

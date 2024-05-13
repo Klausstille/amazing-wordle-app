@@ -35,7 +35,7 @@ export default function Nav({
                         width < 1024 && showStats && setShowStats(!showStats);
                     }}
                 >
-                    <h3 className="text-gray-800">Instructions</h3>
+                    <h3 className="text-gray-800">💡</h3>
                 </li>
                 <li
                     onClick={() => {
@@ -47,7 +47,7 @@ export default function Nav({
                 </li>
                 {result.length >= 2 && (
                     <li onClick={() => onHandleHint(true)}>
-                        <h3>💡</h3>
+                        <h3>🔮</h3>
                     </li>
                 )}
                 <li className="flex gap-2 text-sm">
@@ -68,7 +68,7 @@ export default function Nav({
                             lang === "en" && setSwitchLang(true);
                         }}
                         className={`${
-                            lang === "de" && "bg-blue-500"
+                            lang === "de" && "bg-blue-500 text-white"
                         } w-[50px] bg-[#ebebeb] text-gray-800 h-6 py-0 rounded-full`}
                     >
                         <h3>DE</h3>

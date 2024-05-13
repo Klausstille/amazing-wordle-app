@@ -41,7 +41,7 @@ export default function GuessDistribution({
                                 className={`grid`}
                             >
                                 <p>{index + 1}</p>
-                                <span className="bg-white text-s text-right pr-1 min-w-[15px] text-black">
+                                <span className="bg-blue-500 text-white text-s text-right pr-1 min-w-[15px] text-black">
                                     <p> {numberOfWonGames}</p>
                                 </span>
                             </aside>
