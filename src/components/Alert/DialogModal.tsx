@@ -51,7 +51,7 @@ export default function DialogModal({
                     setSwitchLang(false);
                 }}
             >
-                <h3 className="text-center text-2xl pb-4">
+                <h3 className="text-center text-2xl pb-4 font-black">
                     {switchLang ? langTextHint : titleTextHint}
                 </h3>
 
