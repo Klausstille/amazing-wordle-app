@@ -18,10 +18,11 @@ export default function Intro({ handleSubmit }: IntroProps) {
                     <h2 className="font-bold">Hi there!</h2>
                     <h3 className="font-bold">What's your Name?</h3>
                     <input
+                        maxLength={7}
                         type="text"
                         name="name"
                         placeholder="Elara Serendipity"
-                        className="rounded-full py-0 h-8 w-[15vw] min-w-[200px] text-black text-center text-l"
+                        className="rounded-full py-0 h-8 w-[15vw] min-w-[200px] text-black text-center text-l border border-gray-800"
                     />
                 </label>
                 <h3 className="font-bold text-center">Chose your language</h3>{" "}
@@ -32,7 +33,7 @@ export default function Intro({ handleSubmit }: IntroProps) {
                     <option value="english">English</option>
                     <option value="german">German</option>
                 </select>
-                <button className="rounded-full mt-5 py-0 h-8 w-[15vw] min-w-[150px] text-white text-center text-md bg-emerald-500">
+                <button className="rounded-full py-0 h-8 w-[15vw] min-w-[200px] text-white text-center text-md bg-emerald-500">
                     Let's go!
                 </button>
             </form>

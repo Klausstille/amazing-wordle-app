@@ -10,6 +10,7 @@ type NavProps = {
     width: number;
     lang: string;
     result: Result[];
+    player: string;
 };
 
 export default function Nav({
@@ -23,10 +24,11 @@ export default function Nav({
     onHandleHint,
     result,
     setSwitchLang,
+    player,
 }: NavProps) {
     return (
         <>
-            <h3 className="font-bold text-gray-800">MyWordle</h3>
+            <h3 className="font-bold text-gray-800">Hi, {player} 🤩</h3>
             <ul className="flex justify-end gap-4 cursor-pointer">
                 <li
                     className="lg:invisible visible"

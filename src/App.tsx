@@ -312,6 +312,7 @@ function App() {
                                 lang={lang}
                                 onHandleHint={onHandleHint}
                                 result={result}
+                                player={player}
                             />
                         </NavWrapper>
                         <CSSTransition

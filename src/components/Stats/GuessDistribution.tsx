@@ -27,7 +27,7 @@ export default function GuessDistribution({
     return (
         <>
             <h3 className="font-black pt-6">{title}</h3>
-            <section className="grid gap-1">
+            <section className="flex justify-center w-full">
                 <section className="grid gap-1">
                     {Array.from({ length: 6 }).map((_, index) => {
                         const { widthOfElement, numberOfWonGames } =
@@ -36,13 +36,15 @@ export default function GuessDistribution({
                             <aside
                                 key={index}
                                 style={{
-                                    gridTemplateColumns: `20px ${widthOfElement}px`,
+                                    gridTemplateColumns: `20px ${
+                                        widthOfElement ? widthOfElement : 0
+                                    }px`,
                                 }}
                                 className={`grid`}
                             >
                                 <p>{index + 1}</p>
-                                <span className="bg-blue-500 text-white text-s text-right pr-1 min-w-[15px] text-black">
-                                    <p> {numberOfWonGames}</p>
+                                <span className="bg-blue-500 text-[white] text-s text-right pr-1 min-w-[15px]">
+                                    <p>{numberOfWonGames}</p>
                                 </span>
                             </aside>
                         );
